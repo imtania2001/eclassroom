@@ -29,7 +29,7 @@
                 <div class="form-group mb-3 d-flex align-items-center  flex-wrap">
                     <button class="btn btn-primary" type="submit" style="width: 100px;">Login</button>
                     <p class=" m-auto" style="width: 150px;"><a href="">Forget Password?</a></p>
-                    <p class=" m-auto" style="width: 250px;">Don't have account? <a href="">Register Now</a></p>
+                    <p class=" m-auto" style="width: 250px;">Don't have account? <a href="teacher_signup.php">Register Now</a></p>
                 </div>
             </form>
         </div>
