@@ -1,19 +1,42 @@
-$("#login_form").submit(async function(e){
+$("#login_form").submit(async function(e) {
     e.preventDefault();
-    alert("Hello");
-    let email_id = document.getElementById("email_id");
-    let password = document.getElementById("password");
+    let email_id = document.getElementById("email_id").value;
+    let password = document.getElementById("password").value;
 
     await $.ajax({
-        type : "POST",
-        url : "http://localhost/api/v1/users/login.php",
-        data : {
-            email_id : email_id,
-            password : password
+        type: "POST",
+        url: "../api/v1/users/login.php",
+        data: {
+            email_id: email_id,
+            password: password,
         },
-        success : function(data){
+        success: function(data) {
             console.log(data);
-        }
+            if (data["status_code"] == 1200) {
+                let arr = data["data"];
+                if (arr.login) {
+                    if (arr.role == "student") {
+                        alert(arr.message);
+                        window.location = "../users/student/";
+                        sessionStorage.setItem("user", arr.user);
+                    } else if (arr.role == "teacher") {
+                        alert(arr.message);
+                        window.location = "../users/teacher/";
+                        sessionStorage.setItem("user", arr.user);
+                    } else if (arr.role == "admin") {
+                        alert(arr.message);
+                        window.location = "../users/admin/";
+                        sessionStorage.setItem("user", arr.user);
+                    } else {
+                        alert("An Error Occured");
+                        window.location.reload();
+                    }
+                } else {
+                    alert(arr.message);
+                }
+            } else {
+                alert(data["message"]);
+            }
+        },
     });
-
 });

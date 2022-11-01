@@ -37,5 +37,3 @@ if (isset($_REQUEST['email_id']) && isset($_REQUEST['password'])) {
 }else{
     echo json_encode(array('status' => 'error', 'status_code' => 1400,  'message' => 'PARAMS NOT FOUND'));
 }
-
-?>
