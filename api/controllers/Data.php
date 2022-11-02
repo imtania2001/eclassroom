@@ -43,7 +43,7 @@ class Data
         } else
             return false;
     }
-    // Showing All Streams
+    // Showing All Subjects
     public static function getSubjectBySemesterId($semesters_id)
     {
         $config = Mysql::config();

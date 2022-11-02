@@ -25,7 +25,7 @@
 
     </div>
 
-    <script src="static/js/index.js?v=1.1"></script>
+    <script src="static/js/index.js?v=1.3"></script>
 </body>
 
 </html>
