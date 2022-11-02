@@ -113,7 +113,13 @@ body {
 select:hover {
     cursor: pointer;
 }
-
+div.content{
+    height:150px;
+    width:150px;
+    border:5px;
+    float:left;
+    margin:20px;
+}
 /* Responsive CSS */
 @media only screen and (max-width: 600px) {
     .profile-row {

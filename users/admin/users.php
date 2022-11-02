@@ -42,7 +42,7 @@
                         <h2>TIH College Space</h2>
                     </a>
                 </div>
-            </div>
+            </div class="content" id="first">
 
             <section class="page-container">
                 <section class="page-content">
@@ -66,7 +66,7 @@
                         </table>
                         <form class="row g-3">
                         <form class="row g-3">
-  <div class="col-md-6">
+     <                      
     <label for="inputuser" class="form-label">usertype</label>
     <input type="user" class="form-control" id="inputusers">
     <label for="inputEmail4" class="form-label">Email</label>
@@ -80,10 +80,10 @@
 <div>
         <table class="table table-hover" width=50%>
                             <thead>
-                                <th>S.No</th>
+                                <th>SL NO.</th>
                                 <th>Date</th>
                                 <th>Time</th>
-                                <th>Stream</th>
+                                <th>stream</th>
                             </thead>
                             <tbody>
                                 <tr>
