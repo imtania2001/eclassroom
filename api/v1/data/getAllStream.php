@@ -17,23 +17,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
         header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
 }
 header('Content-type: application/json');
-if (isset($_REQUEST['email_id']) && isset($_REQUEST['password'])) {
-    require "../../controllers/User.php";
+if (isset($_REQUEST['id'])) {
+    require "../../controllers/Data.php";
 
-    $result = User::login($_REQUEST['email_id'],$_REQUEST['password']);
-    
-    if($result){
+    $result = Data::getAllStream();
+
+
+    if ($result) {
         echo json_encode(
             array(
-                "status" => "success", 
-                "status_code" => "1200" , 
+                "status" => "success",
+                "status_code" => "1200",
                 "data" => $result
             )
         );
-    }else{
-        echo json_encode(array('status' => 'success', 'status_code' => 1300));
+    } else {
+        echo json_encode(array('status' => 'success', 'status_code' => 1300, "message" => "Error Occured"));
     }
-    
-}else{
+} else {
     echo json_encode(array('status' => 'error', 'status_code' => 1400,  'message' => 'PARAMS NOT FOUND'));
 }

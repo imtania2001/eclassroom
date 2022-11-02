@@ -12,6 +12,12 @@
     <?php
     include "utils/header.php";
     ?>
+    <style>
+    .card {
+        background: #ffffff96;
+        margin: 2px auto;
+    }
+    </style>
 </head>
 
 <body>
@@ -46,71 +52,122 @@
 
             <section class="page-container">
                 <section class="page-content">
-                    <div>
+                    <div class="row d-flex flex-wrap justify-content-evenly">
+                        <div class="col-sm-5 card">
+                            <div class="card-body">
+                                <h4 class="card-title">Registered Users : <span>(0)</span></h4>
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <th>S.No</th>
+                                            <th>Email Id</th>
+                                            <th>Role</th>
+                                            <th>Remove</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>tania@gmail.com</td>
+                                                <td>student</td>
+                                                <td><button class="btn btn-danger"><i
+                                                            class="fa-solid fa-trash"></i></button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-5 card">
+                            <div class="card-body">
+                                <h4 class="card-title">Add a New User</h4>
+                                <form class="row g-3 m-auto">
+                                    <div class="col-md-6">
+                                        <label for="inputuser" class="form-label">Usertype</label>
+                                        <input type="user" class="form-control" id="inputusers">
+                                        <label for="inputEmail4" class="form-label">Email</label>
+                                        <input type="Email" class="form-control" id="inputEmail4">
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row d-flex flex-wrap justify-content-evenly">
+                        <div class="col-sm-11 card">
+                            <div class="card-body">
+                                <h4 class="card-title">All Teachers : <span>(0)</span></h4>
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <th>S.No</th>
+                                            <th>Unique Id</th>
+                                            <th>Name</th>
+                                            <th>Mobile</th>
+                                            <th>Email</th>
+                                            <th>DOB</th>
+                                            <th>Gender</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>15201220056</td>
+                                                <td>Tania Ghosh</td>
+                                                <td>1497648694</td>
+                                                <td>tania@gmail.com</td>
+                                                <td>10-56-2500</td>
+                                                <td>Female</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row d-flex flex-wrap justify-content-evenly">
+                        <div class="col-sm-11 card">
+                            <div class="card-body">
+                                <h4 class="card-title">All Students : <span>(0)</span></h4>
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <th>S.No</th>
+                                            <th>Roll No</th>
+                                            <th>Name</th>
+                                            <th>Mobile</th>
+                                            <th>Email</th>
+                                            <th>DOB</th>
+                                            <th>Gender</th>
+                                            <th>Stream</th>
+                                            <th>Semester</th>
+                                            <th>Batch</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>15201220056</td>
+                                                <td>Tania Ghosh</td>
+                                                <td>1497648694</td>
+                                                <td>tania@gmail.com</td>
+                                                <td>10-56-2500</td>
+                                                <td>Female</td>
+                                                <td>Bca</td>
+                                                <td>Semester 1</td>
+                                                <td>2020</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="height: 200px;">
 
-                        <table class="table table-hover" width=50%>
-                            <thead>
-                                <th>S.No</th>
-                                <th>Date</th>
-                                <th>Time</th>
-                                <th>Stream</th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>28-10-2022</td>
-                                    <td>10:00 AM</td>
-                                    <td>BCA</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <form class="row g-3">
-                        <form class="row g-3">
-     <                      
-    <label for="inputuser" class="form-label">usertype</label>
-    <input type="user" class="form-control" id="inputusers">
-    <label for="inputEmail4" class="form-label">Email</label>
-    <input type="Email" class="form-control" id="inputEmail4">
-  </div>
-  <div class="col-12">
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </div>
-</form>
+                    </div>
+                </section>
+            </section>
         </div>
-<div>
-        <table class="table table-hover" width=50%>
-                            <thead>
-                                <th>SL NO.</th>
-                                <th>Date</th>
-                                <th>Time</th>
-                                <th>stream</th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>28-10-2022</td>
-                                    <td>10:00 AM</td>
-                                    <td>BCA</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <table class="table table-hover" width=50%>
-                            <thead>
-                                <th>S.No</th>
-                                <th>Date</th>
-                                <th>Time</th>
-                                <th>Stream</th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>28-10-2022</td>
-                                    <td>10:00 AM</td>
-                                    <td>BCA</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
     </div>
 
     <script src="static/js/admin.js"></script>
