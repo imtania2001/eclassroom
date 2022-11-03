@@ -11,10 +11,8 @@ $("#login_form").submit(async function (e) {
             password: password,
         }
     }).done(function (data) {
-        // console.log("Line 14 : " + data);
         if (data.status_code == 1200) {
             let arr = data.data;
-            // console.log("Line 17 : " + arr);
             if (arr.login) {
                 if (arr.role == "student") {
                     alert(arr.message);

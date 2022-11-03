@@ -1,9 +1,9 @@
 $(document).ready(function () {
-  getFacultyClassesByIdHTML();
+    getFacultyClassesByIdHTML();
 });
 
 function getFacultyClassesByIdHTML() {
-  let html = `<table class="table table-hover">
+    let html = `<table class="table table-hover">
     <thead>
       <th>S.No</th>
       <th>Date</th>
@@ -45,13 +45,13 @@ function getFacultyClassesByIdHTML() {
       </tr>
     </tbody>
   </table>`;
-  document.getElementById("myclass-container").innerHTML = html;
-  document.getElementById("show-table").disabled = true;
-  document.getElementById("show-form").disabled = false;
+    document.getElementById("myclass-container").innerHTML = html;
+    document.getElementById("show-table").disabled = true;
+    document.getElementById("show-form").disabled = false;
 }
 
 function showCreateClassForm() {
-  let html = `<div class="card overflow-auto bg-transparent border-0 col-sm-10 m-auto">
+    let html = `<div class="card overflow-auto bg-transparent border-0 col-sm-10 m-auto">
                     <div class="card-body overflow-auto">
                         <h4 class="card-title text-center">Schedule Class</h4>
                         <div class="row overflow-auto" id="createClass" method="post">
@@ -59,12 +59,8 @@ function showCreateClassForm() {
                             <div class="form-group col-sm-6 my-2">
                                 <label class="text-dark px-2">Select Stream</label>
                                 <div class="col-sm-9">
-                                    <select id="stream" class="form-control">
-                                        <option value="" selected disabled>Choose Stream</option>
-                                        <option value="BCA">BCA</option>
-                                        <option value="BBA">BBA</option>
-                                        <option value="MCA">MCA</option>
-                                        <option value="MSC">MSC</option>
+                                    <select id="stream" class="form-control" onchange="fetchSemester();">
+                                        <option value="" selected disabled>Select Stream</option>
                                     </select>
                                 </div>
                             </div>
@@ -73,12 +69,6 @@ function showCreateClassForm() {
                                 <div class="col-sm-9">
                                     <select id="semester" class="form-control">
                                         <option value="" selected disabled>Choose Semester</option>
-                                        <option value="Semester 1">Semester 1</option>
-                                        <option value="Semester 2">Semester 2</option>
-                                        <option value="Semester 3">Semester 3</option>
-                                        <option value="Semester 4">Semester 4</option>
-                                        <option value="Semester 5">Semester 5</option>
-                                        <option value="Semester 6">Semester 6</option>
                                     </select>
                                 </div>
                             </div>
@@ -136,13 +126,35 @@ function showCreateClassForm() {
                         </div>
                     </div>
                 </div>`;
-  document.getElementById("myclass-container").innerHTML = html;
-  document.getElementById("show-table").disabled = false;
-  document.getElementById("show-form").disabled = true;
+    document.getElementById("myclass-container").innerHTML = html;
+    document.getElementById("show-table").disabled = false;
+    document.getElementById("show-form").disabled = true;
+
+    document.getElementById("stream").innerHTML = `<option value="" disabled>Loading...!!!</option>`;
+    $.ajax({
+        "url": "http://localhost/eclassroom/api/v1/data/getAllStream.php",
+        "method": "POST",
+        "timeout": 0,
+    }).done(function (response) {
+        console.log(response);
+        if (response["status_code"] == 1200) {
+            // console.log(response["data"]);
+            let total_record = response["data"].total;
+            let arr = response["data"].streams;
+            let content = `<option value="" selected disabled>Select Stream</option>`;
+            for (let i = 0; i < total_record; i++) {
+                content += `<option value="${arr[i].id}">${arr[i].stream}</option>`;
+            }
+            document.getElementById("stream").innerHTML = content;
+        } else {
+            console.log(["message"]);
+        }
+    });
+
 }
 
 function showEditClassForm(id = "") {
-  let html = `<div class="card overflow-auto bg-transparent border-0 col-sm-10 m-auto">
+    let html = `<div class="card overflow-auto bg-transparent border-0 col-sm-10 m-auto">
                     <div class="card-body overflow-auto">
                         <h4 class="card-title text-center">Edit your Scheduled Class</h4>
                         <input type="hidden" id="classid" value="${id}" >
@@ -228,19 +240,53 @@ function showEditClassForm(id = "") {
                         </div>
                     </div>
                 </div>`;
-  document.getElementById("myclass-container").innerHTML = html;
-  document.getElementById("show-table").disabled = false;
-  document.getElementById("show-form").disabled = false;
+    document.getElementById("myclass-container").innerHTML = html;
+    document.getElementById("show-table").disabled = false;
+    document.getElementById("show-form").disabled = false;
 }
 
 function cancelFormEdit() {
-  let id = document.getElementById("classid").value;
-  showEditClassForm(id);
+    let id = document.getElementById("classid").value;
+    showEditClassForm(id);
 }
 
 function deleteClass(id = "") {
-  let val = confirm("Are you sure, You want to delete the class?");
-  if (val) {
-    getFacultyClassesByIdHTML();
-  }
+    let val = confirm("Are you sure, You want to delete the class?");
+    if (val) {
+        getFacultyClassesByIdHTML();
+    }
+}
+
+
+// Fetching Alll Semester by Stream Id -------------------------------------------------
+function fetchSemester() {
+    let stream_id = document.getElementById("stream").value;
+    var form = new FormData();
+    form.append("stream_id", stream_id);
+    form.append("stream_id", stream_id);
+    var settings = {
+        "url": "http://localhost/eclassroom/api/v1/data/getSemesterByStreamId.php",
+        "method": "POST",
+        "timeout": 0,
+        "processData": false,
+        "contentType": false,
+        "data": form
+    };
+
+    document.getElementById("semester").innerHTML = `<option value="" selected disabled>Loading...!!!</option>`;
+    
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+        if (response.status_code == "1200") {
+            let total_record = response.data.total;
+            let arr = response.data.semesters;
+            let content = `<option value="" selected disabled>Select Semester</option>`;
+            for (let i = 0; i < total_record; i++) {
+                content += `<option value="${arr[i].id}">${arr[i].sem}</option>`;
+            }
+            document.getElementById("semester").innerHTML = content;
+        } else {
+            console.log(response["message"]);
+        }
+    });
 }
