@@ -3,8 +3,9 @@ $("#login_form").submit(async function (e) {
     let email_id = document.getElementById("email_id").value;
     let password = document.getElementById("password").value;
 
+    // Here API Path is set from the root of server ( / )
     $.ajax({
-        "url": "http://localhost/eclassroom/api/v1/users/login.php",
+        "url": "/api/v1/users/login.php",
         "method": "POST",
         "data": {
             email_id: email_id,
