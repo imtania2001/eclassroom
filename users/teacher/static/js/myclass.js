@@ -67,7 +67,7 @@ function showCreateClassForm() {
                             <div class="form-group col-sm-6 my-2">
                                 <label class="text-dark px-2">Select Semester</label>
                                 <div class="col-sm-9">
-                                    <select id="semester" class="form-control">
+                                    <select id="semester" class="form-control" onchange="fetchSubject();">
                                         <option value="" selected disabled>Choose Semester</option>
                                     </select>
                                 </div>
@@ -88,8 +88,7 @@ function showCreateClassForm() {
                                 <div class="col-sm-9">
                                     <select id="subject" class="form-control">
                                         <option value="" selected disabled>Choose Subject</option>
-                                        <option value="C Language">C Language</option>
-                                        <option value="C++ Language">C++ Language</option>
+                    
                                     </select>
                                 </div>
                             </div>
@@ -118,7 +117,7 @@ function showCreateClassForm() {
                                 </div>
                             </div>
                             <div class="form-group d-flex justify-content-center align-items-center flex-wrap">
-                                <button class="btn btn-success mx-3 mt-2" id="createClassBtn" type="button">Submit</button>
+                                <button class="btn btn-success mx-3 mt-2" id="createClassBtn" type="button" onclick="createClassAPI();">Submit</button>
                                 <button class="btn btn-danger mx-3 mt-2" id="cancelCreateClass" onclick="showCreateClassForm();">Cancel</button>
                             </div>
                             <div style="height:200px; width:100%;">
@@ -132,7 +131,7 @@ function showCreateClassForm() {
 
     document.getElementById("stream").innerHTML = `<option value="" disabled>Loading...!!!</option>`;
     $.ajax({
-        "url": "http://localhost/eclassroom/api/v1/data/getAllStream.php",
+        "url": "/api/v1/data/getAllStream.php",
         "method": "POST",
         "timeout": 0,
     }).done(function (response) {
@@ -265,7 +264,7 @@ function fetchSemester() {
     form.append("stream_id", stream_id);
     form.append("stream_id", stream_id);
     var settings = {
-        "url": "http://localhost/eclassroom/api/v1/data/getSemesterByStreamId.php",
+        "url": "/api/v1/data/getSemesterByStreamId.php",
         "method": "POST",
         "timeout": 0,
         "processData": false,
@@ -274,7 +273,7 @@ function fetchSemester() {
     };
 
     document.getElementById("semester").innerHTML = `<option value="" selected disabled>Loading...!!!</option>`;
-    
+
     $.ajax(settings).done(function (response) {
         console.log(response);
         if (response.status_code == "1200") {
@@ -290,15 +289,80 @@ function fetchSemester() {
         }
     });
 }
-//fetch all subject by semesterid-------------------------------------------------------
-function fetchSubject()
-var settings = {
-    "url": "http://localhost/eclassroom/api/v1/data/getSubjectBySemesterId.php?semesters_id=2",
-    "method": "POST",
-    "timeout": 0,
-  };
-  
-  $.ajax(settings).done(function (response) {
-    console.log(response);
-  });
 
+//Fetch all subject by semesterId----------------------------------------------
+
+function fetchSubject() {
+    let semesters_id = document.getElementById("semester").value;
+    var form = new FormData();
+    form.append("semesters_id", semesters_id);
+    var settings = {
+        "url": "/api/v1/data/getSubjectBySemesterId.php",
+        "method": "POST",
+        "timeout": 0,
+        "processData": false,
+        "contentType": false,
+        "data": form
+    };
+
+    document.getElementById("subject").innerHTML = `<option value="" selected disabled>Loading...!!!</option>`;
+
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+        if (response.status_code == "1200") {
+            let total_record = response.data.total;
+            let arr = response.data.subjects;
+            let content = `<option value="" selected disabled>Select Subject</option>`;
+            for (let i = 0; i < total_record; i++) {
+                content += `<option value="${arr[i].id}">${arr[i].subject}</option>`;
+            }
+            document.getElementById("subject").innerHTML = content;
+        } else {
+            console.log(response["message"]);
+        }
+    });
+}
+
+
+// Create Class API Integration
+
+async function createClassAPI() {
+    let stream = document.getElementById("stream").value;
+    let semester = document.getElementById("semester").value;
+    let subject=document.getElementById("subject").value;
+    let topic=document.getElementById("topic").value;
+    let date=document.getElementById("date").value;
+    let time=document.getElementById("time").value;
+    let classlink=document.getElementById("classlink").value;
+    let section=document.getElementById("section").value;
+    var form = new FormData();
+    form.append("faculty_id", "1");
+    form.append("faculty_name", "subrata saha");
+    form.append("stream", stream);
+    form.append("sem", semester);
+    form.append("subject", subject);
+    form.append("topic",topic);
+    form.append("date", date);
+    form.append("time", time);
+    form.append("classlink", classlink);
+    form.append("section",section );
+
+    var settings = {
+        "url": "/api/v1/scheduleclass/create.php",
+        "method": "POST",
+        "timeout": 0,
+        "processData": false,
+        "contentType": false,
+        "data": form
+    };
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+        if(response.status_code == 1200){
+            alert(response.message);
+            getFacultyClassesByIdHTML(); 
+        }else{
+            alert(response.message);
+            showCreateClassForm();
+        }
+      });
+}

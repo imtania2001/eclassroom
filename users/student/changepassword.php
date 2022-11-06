@@ -111,22 +111,18 @@
                 <div class="page-content overflow-auto" id="mynote-container">
                     <div class="limit">
                         <div class="login-container">
-                            <div class="bb-login">
-                                <form class="bb-form validate-form" method="post"> <span class="bb-form-title p-b-26">FORGET PASSWORD </span> <span class="bb-form-title p-b-48"> <i class="mdi mdi-symfony"></i> </span>
-                                    <input type="password" class="form-control" style="margin-bottom:20px;"aria-describedby="emailHelp" placeholder="Enter New Password">
-                                    <input type="password" class="form-control" aria-describedby="emailHelp" placeholder="Re-Enter New Password">
-                                    <div class="login-container-form-btn">
-                                        <div style="margin-bottom:20px; margin-right:10px;">
-                                            <div class="bb-login-form-btn">
-                                                <div class="bb-form-bgbtn"></div> <button class="bb-form-btn"> Submit </button>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="bb-login-form-btn">
-                                                <div class="bb-form-bgbtn"></div> <button class="bb-form-btn" onclick="location:'index.html'">Cancel</button>
-                                            </div>
+                            <div class="bb-login row">
+                                <form class="bb-form validate-form col-sm-6 m-auto" method="post"> <span class="bb-form-title p-b-26">
+                                        <h4 class="text-center my-2">Change Password</h4>
+                                        <input type="password" class="form-control mt-4 mb-4" placeholder="Enter Current Password">
+                                        <input type="password" class="form-control mb-4" placeholder="Enter New Password">
+                                        <input type="password" class="form-control mb-4" placeholder="Re-Enter New Password">
+                                        <div class="login-container-form-btn d-flex flex-wrap justify-content-center">
+                                            <button class="mx-2 my-3 btn btn-success"> Submit </button>
+                                            <button class="mx-2 my-3 btn btn-danger" onclick="window.location.reload();">Cancel</button>
+
                                             <div>
-                                            </div>
+
                                 </form>
                             </div>
                         </div>
