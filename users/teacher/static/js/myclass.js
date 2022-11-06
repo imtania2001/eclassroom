@@ -258,7 +258,7 @@ function deleteClass(id = "") {
 }
 
 
-// Fetching Alll Semester by Stream Id -------------------------------------------------
+// Fetching All Semester by Stream Id -------------------------------------------------
 function fetchSemester() {
     let stream_id = document.getElementById("stream").value;
     var form = new FormData();
@@ -290,3 +290,15 @@ function fetchSemester() {
         }
     });
 }
+//fetch all subject by semesterid-------------------------------------------------------
+function fetchSubject()
+var settings = {
+    "url": "http://localhost/eclassroom/api/v1/data/getSubjectBySemesterId.php?semesters_id=2",
+    "method": "POST",
+    "timeout": 0,
+  };
+  
+  $.ajax(settings).done(function (response) {
+    console.log(response);
+  });
+
