@@ -45,13 +45,29 @@
             </div>
 
             <section class="page-container">
-            <div class="sc-heading">
+                <div class="sc-heading">
                     <div class="sc-heading-part">
-                        <h4 class="card-title">All Notes(1)</h4>
+                        <h4 class="card-title">All Notes(<span id="total-note">0</span>)</h4>
                     </div>
                 </div>
                 <div class="page-content overflow-auto" id="mynote-container">
+                    <table class="table table-hover">
+                        <thead>
+                            <th>S.No</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Stream</th>
+                            <th>Semester</th>
+                            <th>Section</th>
+                            <th>Subject</th>
+                            <th>Topic</th>
+                            <th>Notes</th>
+                        </thead>
+                        <tbody id="fetch-notes">
 
+                        </tbody>
+                    </table>
+                    <p class="text-muted text-center" id="message"></p>
                 </div>
             </section>
         </div>
