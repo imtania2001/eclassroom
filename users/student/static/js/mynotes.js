@@ -8,7 +8,7 @@ $(document).ready(async function () {
     form.append("section", section);
     
     var settings = {
-      "url": "http://localhost/eclassroom/api/v1/updatednote/viewallnotes.php?stream=bca&sem=2nd&section=alpha",
+      "url": "/api/v1/updatednote/viewallnotes.php?",
       "method": "POST",
       "timeout": 0,
       "processData": false,
@@ -30,13 +30,13 @@ $(document).ready(async function () {
             tbody += `<tr>
                             <td>${i+1}</td>
                             <td>${arr[i].date}</td>
-                            <td>${arr[i].date}</td>
-                            <td>${arr[i].date}</td>
-                            <td>${arr[i].date}</td>
-                            <td>${arr[i].date}</td>
-                            <td>${arr[i].date}</td>
-                            <td>${arr[i].date}</td>
-                            <td>${arr[i].date}</td>
+                            <td>${arr[i].stream}</td>
+                            <td>${arr[i].sem}</td>
+                            <td>${arr[i].section}</td>
+                            <td>${arr[i].subject}</td>
+                            <td>${arr[i].topic}</td>
+                            <td><a href="${arr[i].file}" download><button>Download</button></a></td>
+                         
                         </tr>
             `;
         }

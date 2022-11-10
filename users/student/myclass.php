@@ -50,13 +50,30 @@
                         
                         <div class="sc-heading">
                     <div class="sc-heading-part">
-                        <h4 class="card-title">All classes</h4>
+                        <h4 class="card-title">All classes(<span id="total-class">0</span>)</h4>
                     </div>
                 </div>
         
                 </div>
                 <div class="page-content overflow-auto" id="myclass-container">
+                <table class="table table-hover">
+                        <thead>
+                            <th>S.No</th>
+                            <th>Date</th>
+                           
+                            <th>Stream</th>
+                            <th>Semester</th>
+                            <th>Section</th>
+                            <th>Subject</th>
+                            <th>Topic</th>
+                            <th>Link</th>
+                        </thead>
+                        <tbody id="fetch-class">
 
+                        </tbody>
+                    </table>
+                    <p class="text-muted text-center" id="message"></p>
+                </div>
                 </div>
             </section>
         </div>

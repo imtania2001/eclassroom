@@ -51,4 +51,62 @@ class User
         }
         return false;
     }
+    public static function addusers($email_id,$role)
+    {
+        $config = Mysql::config();
+        $conn = new mysqli($config[0], $config[1], $config[2], $config[3]);
+        if (!$conn)
+            return false;
+
+        // Checking whether the user already exists or not
+        $sql = "SELECT * FROM `login` WHERE `email_id`='$email_id'";
+        $result = $conn->query($sql);
+        if($result && $result->num_rows){
+            return false;
+        }
+
+        $sql = "INSERT INTO `login`(`email_id`,  `role`) VALUES ('$email_id',  '$role')";
+        $result = $conn->query($sql);
+        return $result;
+        if ($result)
+            return true;
+        else
+            return false;
+    }
+//view users
+public static function viewallusers($email_id,$role){
+    $config = Mysql::config();
+    $conn = new mysqli($config[0], $config[1], $config[2], $config[3]);
+    if (!$conn)
+        return false;
+
+    $sql = "SELECT * FROM `login`";
+    $result = $conn->query($sql);
+    if ($result)
+    {
+        $total = $result->num_rows;
+        $arr = [];
+        while($row=$result->fetch_assoc()){
+            $arr[] = $row;
+        }
+        return array("total"=>$total,"row"=>$arr);
+    }
+    else
+        return false;
+}
+//delete users
+public static function deleteusers($id){
+    $config = Mysql::config();
+    $conn = new mysqli($config[0], $config[1], $config[2], $config[3]);
+  if (!$conn)
+     return false;
+
+   $sql = "DELETE FROM `login` WHERE `id`='$id' ";
+    $result = $conn->query($sql);
+   if ($result)
+      return true;
+ 
+   else
+       return false;
+}
 }

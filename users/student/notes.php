@@ -55,7 +55,7 @@
                         <thead>
                             <th>S.No</th>
                             <th>Date</th>
-                            <th>Time</th>
+                           
                             <th>Stream</th>
                             <th>Semester</th>
                             <th>Section</th>

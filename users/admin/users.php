@@ -55,7 +55,7 @@
                     <div class="row d-flex flex-wrap justify-content-evenly">
                         <div class="col-sm-5 card">
                             <div class="card-body">
-                                <h4 class="card-title">Registered Users : <span>(0)</span></h4>
+                                <h4 class="card-title">Registered Users : <span>0</span></h4>
                                 <div class="table-responsive">
                                     <table class="table table-hover">
                                         <thead>
@@ -83,12 +83,12 @@
                                 <form class="row g-3 m-auto">
                                     <div class="col-md-6">
                                         <label for="inputuser" class="form-label">Usertype</label>
-                                        <input type="user" class="form-control" id="inputusers">
+                                        <input type="user" oninput="removerBorderDanger(this);" class="form-control" id="usertype">
                                         <label for="inputEmail4" class="form-label">Email</label>
-                                        <input type="Email" class="form-control" id="inputEmail4">
+                                        <input type="email" oninput="removerBorderDanger(this);" class="form-control" id="email">
                                     </div>
                                     <div class="col-12">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="button" onclick="addUser();" class="btn btn-primary">Submit</button>
                                     </div>
                                 </form>
                             </div>
@@ -171,6 +171,7 @@
     </div>
 
     <script src="static/js/admin.js"></script>
+    <script src="static/js/users.js"></script>
 </body>
 
 </html>

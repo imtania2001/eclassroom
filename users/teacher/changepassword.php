@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STUDENT | Updates</title>
+    <title>STUDENT | Notes</title>
     <link rel="stylesheet" href="static/css/panel.css">
     <link rel="stylesheet" href="static/css/style.css">
     <link rel="shortcut icon" href="static/images/logo.png" />
@@ -45,32 +46,34 @@
             </div>
 
             <section class="page-container">
-                <div class="sc-heading">
-                    <div class="sc-heading-part">
-                        <h4 class="card-title">All Updates(<span id="total-updated">0</span>)</h4>
-                    </div>
-                </div>
-                
-                <div class="page-content overflow-auto" id="updates-container">
-                <table class="table table-hover">
-                        <thead>
-                            <th>S.No</th>
-                            <th>Date</th>
-                            <th>mesage</th>
-                            <th>Link</th>
-                        </thead>
-                        <tbody id="fetch-updated">
+                <div class="page-content overflow-auto" id="mynote-container">
+                    <div class="limit">
+                        <div class="login-container">
+                            <div class="bb-login row">
+                                <form class="bb-form validate-form col-sm-6 m-auto" method="post"> <span class="bb-form-title p-b-26">
+                                        <h4 class="text-center my-2">Change Password</h4>
+                                        <input type="password" class="form-control mt-4 mb-4" placeholder="Enter Current Password">
+                                        <input type="password" class="form-control mb-4" placeholder="Enter New Password">
+                                        <input type="password" class="form-control mb-4" placeholder="Re-Enter New Password">
+                                        <div class="login-container-form-btn d-flex flex-wrap justify-content-center">
+                                            <button class="mx-2 my-3 btn btn-success"> Submit </button>
+                                            <button class="mx-2 my-3 btn btn-danger" onclick="window.location.reload();">Cancel</button>
 
-                        </tbody>
-                    </table>
-                    <p class="text-muted text-center" id="message"></p>
+                                            <div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
             </section>
         </div>
     </div>
 
     <script src="static/js/admin.js"></script>
-    <script src="static/js/myupdate.js"></script>
+    <!-- <script src="static/js/mynotes.js"></script> -->
 </body>
 
 </html>
