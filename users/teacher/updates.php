@@ -47,7 +47,7 @@
             <section class="page-container">
                 <div class="sc-heading">
                     <div class="sc-heading-part">
-                        <button type="button" class="btn btn-success btn-lg btn-block" id="show-table" onclick="getAllUpdateHTML()">All Updates (1)</button>
+                        <button type="button" class="btn btn-success btn-lg btn-block" id="show-table" onclick="getAllUpdateHTML()">All Updates(<span id="total_update">0</span>)</button>
                     </div>
                     <div class="sc-heading-part">
                         <button type="button" class="btn btn-success btn-lg btn-block" id="show-form" onclick="showCreateUpdateForm()">New Update</button>

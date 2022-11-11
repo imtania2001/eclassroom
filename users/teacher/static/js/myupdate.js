@@ -46,7 +46,6 @@ function getAllUpdateHTML() {
     console.log(response);
     if(response.status_code==1200){
       // API Success
-
       let arr = response.data.row;
       let total = arr.length;
       tbody = ``;
@@ -81,9 +80,10 @@ function getAllUpdateHTML() {
         document.getElementById("fetch_update").innerHTML = tbody;
         document.getElementById("message").innerHTML = `No Data Found`;
       }
+      document.getElementById("total_update").innerHTML = total;
     }else{
       // API Error
-      document.getElementById("message").innerHTML = `Error`;
+      document.getElementById("message").innerHTML = `An Error Occured`;
     }
   });
 

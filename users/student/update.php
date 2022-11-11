@@ -47,7 +47,7 @@
             <section class="page-container">
                 <div class="sc-heading">
                     <div class="sc-heading-part">
-                        <h4 class="card-title">All Updates(<span id="total-updated">0</span>)</h4>
+                        <h4 class="card-title">All Updates(<span id="total_update">0</span>)</h4>
                     </div>
                 </div>
                 
@@ -56,10 +56,12 @@
                         <thead>
                             <th>S.No</th>
                             <th>Date</th>
-                            <th>mesage</th>
+                            <th>Time</th>
+                            <th>Title</th>
+                            <th>Message</th>
                             <th>Link</th>
                         </thead>
-                        <tbody id="fetch-updated">
+                        <tbody id="fetch_update">
 
                         </tbody>
                     </table>
