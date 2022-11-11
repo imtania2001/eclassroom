@@ -327,7 +327,7 @@ function fetchSubject() {
 // Create Class API Integration
 
 async function createClassAPI() {
-    alert("HEre");
+    alert("Here");
     let stream = document.getElementById("stream").value;
     let semester = document.getElementById("semester").value;
     let subject=document.getElementById("subject").value;

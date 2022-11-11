@@ -2,6 +2,7 @@ $(document).ready(function () {
   getAllUpdateHTML();
 });
 
+// Function to render the HTML of Updates Table
 function getAllUpdateHTML() {
   let html = `<table class="table table-hover">
     <thead>
@@ -10,40 +11,89 @@ function getAllUpdateHTML() {
       <th>Time</th>
       <th>Stream</th>
       <th>Semester</th>
-      <th>Section</th>
-      <th>Subject</th>
-      <th>Topic</th>
+      <th>Message</th>
       <th>Link</th>
       <th>Delete</th>
     </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>28-10-2022</td>
-        <td>10:00 AM</td>
-        <td>BCA</td>
-        <td>Sem1</td>
-        <td>C Programming</td>
-        <td>Alpha</td>
-        <td>Introduction</td>
-        <td>
-          <a href="https://www.google.com/" target="_blank"><button class="btn btn-warning">
-            <i class="fa-solid fa-link"></i>
-          </button></a>
-        </td>
-        <td>
-          <button class="btn btn-danger" onclick="deleteUpdate('id');">
-            <i class="fa-solid fa-trash"></i>
-          </button>
-        </td>
-      </tr>
+    <tbody id="fetch_update">
+
     </tbody>
-  </table>`;
+  </table>
+  <p class="text-muted text-center" id="message"></p>`;
   document.getElementById("updates-container").innerHTML = html;
   document.getElementById("show-table").disabled = true;
   document.getElementById("show-form").disabled = false;
-}
+  // document.getElementById("stream").innerHTML = `<option value="" disabled>Loading...!!!</option>`;
+  // Integrate the API HERE or Call the Function for teacher
+  // var form = new FormData();
+  // form.append("stream", "bca");
+  // form.append("semester", "sem5");
+  // form.append("title", "absulate program  updated");
+  // form.append("message", "program updated");
+  // form.append("file", fileInput.files[0], "/C:/Users/Ditipriya Sen/OneDrive/Documents/absulate.c");
+  // form.append("date", "11/11/2022");
+  // form.append("time", "3.00pm");
+  
+  var settings = {
+    "url": "/api/v1/update/view.php",
+    "method": "POST",
+    "timeout": 0,
+    "processData": false,
+    "contentType": false,
+  };
+  
+  $.ajax(settings).done(function (response) {
+    console.log(response);
+    if(response.status_code==1200){
+      // API Success
 
+      let arr = response.data.row;
+      let total = arr.length;
+      tbody = ``;
+      if(total){
+        // If Data Found
+        for(let i=0;i<total;i++){
+          tbody += `
+          <tr>
+          <td>${i+1}</td>
+          <td>${arr[i].date}</td>
+          <td>${arr[i].time}</td>
+          <td>${arr[i].stream}</td>
+          <td>${arr[i].semester}</td>
+          <td>${arr[i].title}</td>
+          <td>
+            <a href="/api/updates/${arr[i].file}" target="_blank"><button class="btn btn-warning">
+              <i class="fa-solid fa-link"></i>
+            </button></a>
+          </td>
+          <td>
+            <button class="btn btn-danger" onclick="deleteUpdate('id');">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+            `;
+          }
+          // RenderingDynamic Content to table body
+          document.getElementById("fetch_update").innerHTML = tbody;
+      }else{
+        // No Data Found
+        document.getElementById("fetch_update").innerHTML = tbody;
+        document.getElementById("message").innerHTML = `No Data Found`;
+      }
+    }else{
+      // API Error
+      document.getElementById("message").innerHTML = `Error`;
+    }
+  });
+
+
+  }
+  
+
+
+
+// Function to render the Form of Updates Table
 function showCreateUpdateForm() {
   let html = `<div class="card overflow-auto bg-transparent border-0 col-sm-10 m-auto">
                     <div class="card-body overflow-auto">
@@ -133,11 +183,127 @@ function showCreateUpdateForm() {
   document.getElementById("updates-container").innerHTML = html;
   document.getElementById("show-table").disabled = false;
   document.getElementById("show-form").disabled = true;
+  // Call the API function for getting stream
+  function fetchSemester() {
+    let stream_id = document.getElementById("stream").value;
+    var form = new FormData();
+    form.append("stream_id", stream_id);
+    form.append("stream_id", stream_id);
+    var settings = {
+        "url": "/api/v1/data/getSemesterByStreamId.php",
+        "method": "POST",
+        "timeout": 0,
+        "processData": false,
+        "contentType": false,
+        "data": form
+    };
+
+    document.getElementById("semester").innerHTML = `<option value="" selected disabled>Loading...!!!</option>`;
+
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+        if (response.status_code == "1200") {
+            let total_record = response.data.total;
+            let arr = response.data.semesters;
+            let content = `<option value="" selected disabled>Select Semester</option>`;
+            for (let i = 0; i < total_record; i++) {
+                content += `<option value="${arr[i].id}">${arr[i].sem}</option>`;
+            }
+            document.getElementById("semester").innerHTML = content;
+        } else {
+            console.log(response["message"]);
+        }
+    });
 }
 
+}
+// Call the API function for getting Semester
+function fetchSubject() {
+  let semesters_id = document.getElementById("semester").value;
+  var form = new FormData();
+  form.append("semesters_id", semesters_id);
+  var settings = {
+      "url": "/api/v1/data/getSubjectBySemesterId.php",
+      "method": "POST",
+      "timeout": 0,
+      "processData": false,
+      "contentType": false,
+      "data": form
+  };
+
+  document.getElementById("subject").innerHTML = `<option value="" selected disabled>Loading...!!!</option>`;
+
+  $.ajax(settings).done(function (response) {
+      console.log(response);
+      if (response.status_code == "1200") {
+          let total_record = response.data.total;
+          let arr = response.data.subjects;
+          let content = `<option value="" selected disabled>Select Subject</option>`;
+          for (let i = 0; i < total_record; i++) {
+              content += `<option value="${arr[i].id}">${arr[i].subject}</option>`;
+          }
+          document.getElementById("subject").innerHTML = content;
+      } else {
+          console.log(response["message"]);
+      }
+  });
+}
+
+// Create a function to create/insert the Updates (API Integration)
+async function createUpdateAPI() {
+  alert("Here");
+  let stream = document.getElementById("stream").value;
+  let semester = document.getElementById("semester").value;
+  let title=document.getElementById("title").value;
+  let message=document.getElementById("mesage").value;
+  let file=document.getElementById("file").value;
+  let date=document.getElementById("date").value;
+  let time=document.getElementById("time").value;
+  var form = new FormData();
+  form.append("stream", "bca");
+  form.append("semester", "sem5");
+  form.append("title", "absulate program  updated");
+  form.append("message", "program updated");
+  form.append("file", fileInput.files[0], "/C:/Users/Ditipriya Sen/OneDrive/Documents/absulate.c");
+  form.append("date", "11/11/2022");
+  form.append("time", "3.00pm");
+  
+  var settings = {
+    "url": "localhost/api/v1/update/create.php",
+    "method": "POST",
+    "timeout": 0,
+    "processData": false,
+    "contentType": false,
+    "data": form
+  };
+  
+  $.ajax(settings).done(function (response) {
+    console.log(response);
+  });
+  }
+  
+
+
+
+// Function to Delete Update 
 function deleteUpdate(id = "") {
   let val = confirm("Are you sure, You want to delete the update?");
   if (val) {
-    getAllUpdateHTML();
+      // Integrate the API HERE or Call the Function  for Deleting
+      var form = new FormData();
+form.append("id", "2");
+
+var settings = {
+  "url": "http://localhost/api/v1/update/delete.php",
+  "method": "POST",
+  "timeout": 0,
+  "processData": false,
+  "contentType": false,
+  "data": form
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
   }
 }
