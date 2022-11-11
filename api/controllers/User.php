@@ -74,7 +74,7 @@ class User
             return false;
     }
 //view users
-public static function viewallusers($email_id,$role){
+public static function viewallusers(){
     $config = Mysql::config();
     $conn = new mysqli($config[0], $config[1], $config[2], $config[3]);
     if (!$conn)

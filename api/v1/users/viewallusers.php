@@ -17,10 +17,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
         header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
 }
 header('Content-type: application/json');
-if (isset($_REQUEST['email_id'])&& isset($_REQUEST['role'])) {
+if (true) {
     require "../../controllers/User.php";
 
-    $result = User::viewallusers($_REQUEST['email_id'],$_REQUEST['role']);
+    $result = User::viewallusers();
     
     if($result){
         echo json_encode(
