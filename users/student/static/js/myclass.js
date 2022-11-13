@@ -36,7 +36,7 @@ $.ajax(settings).done(function (response) {
                             <td>${arr[i].section}</td>
                             <td>${arr[i].subject}</td>
                             <td>${arr[i].topic}</td>
-                            <td><a href="${arr[i].classlink}" download><button>Link</button></a></td>
+                            <td><a href="${arr[i].classlink}" download><button type="Link" class="btn btn-primary">Link</button></a></td>
                          
                         </tr>
             `;
@@ -48,6 +48,5 @@ $.ajax(settings).done(function (response) {
       }
     });
 });
-
 
   

@@ -35,7 +35,7 @@ $(document).ready(async function () {
                             <td>${arr[i].section}</td>
                             <td>${arr[i].subject}</td>
                             <td>${arr[i].topic}</td>
-                            <td><a href="${arr[i].file}" download><button>Download</button></a></td>
+                            <td><a href="${arr[i].file}" download><button type="view" class="btn btn-primary">view</button></a></td>
                          
                         </tr>
             `;

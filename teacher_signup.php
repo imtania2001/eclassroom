@@ -16,25 +16,27 @@
     <div class="form-container">
         <form action="" method="post">
             <h3>register now</h3>
-            <input type="text" name="Firstname" required placeholder="Firstname">
-            <input type="text" name="midname" required placeholder="midname">
-            <input type="text" name="Lastname" required placeholder="lastname">
-            <input type="text" name="dob" required placeholder="dob">
-            <input type="text" name="gender" required placeholder="gender">
-            <input type="text" name="bba" required placeholder="Bba">
-            <input type="text" name="bca" required placeholder="Bca">
-            <input type="text" name="mca" required placeholder="mca">
-            <input type="text" name="msc" required placeholder="msc">
-            <input type="number" name="phone" required placeholder="phone">
-            <input type="email" name="email" required placeholder="email">
-            <input type="password" name="password" required placeholder="password">
-            <input type="password" name="cpassword" required placeholder="confirm your password">
-            <input type="photo" name="photo" required placeholder="photo">
-            <select name="user_type">
-                <option value="user">user</option>
-                <option value="admin">Teacher</option>
+            <input type="text" id="unique_id" name="Unique_id" required placeholder="Unique_id">
+            <input type="text" id="firstname" name="Firstname" required placeholder="Firstname">
+            <input type="text" id="midname"name="midname" required placeholder="midname">
+            <input type="text" id="Lastname"name="Lastname" required placeholder="lastname">
+            <input type="date" id="dob" required placeholder="dob">
+            <select id="gender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="others">Others</option>
             </select>
-            <input type="submit" name="submit" value="register now" class="form-btn">
+            <input type="text" id="bba"name="bba" required placeholder="Bba">
+            <input type="text" id="bca"name="bca" required placeholder="Bca">
+            <input type="text" id="mca"name="mca" required placeholder="mca">
+            <input type="text" id="msc"name="msc" required placeholder="msc">
+            <input type="number" id="phone"name="phone" required placeholder="phone">
+            <input type="email" id="email" name="email" required placeholder="email">
+            <input type="password" id="password" name="password" required placeholder="password">
+            <input type="password" id="cpassword" name="cpassword" required placeholder="confirm your password">
+            <input type="file" id="photo"name="photo" required placeholder="photo">
+    
+            <input type="button" onclick="teacherRegistration();" name="submit" value="register now" class="form-btn">
             <p>already have an account? <a href="index.php">login now</a></p>
         </form>
 

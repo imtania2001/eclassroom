@@ -17,10 +17,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
         header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
 }
 header('Content-type: application/json');
-if (isset($_REQUEST['unique_id'])&& isset($_REQUEST['firstname']) && isset($_REQUEST['midname'])&& isset($_REQUEST['lastname'])&&isset($_REQUEST['dob'])&&isset($_REQUEST['gender'])&&isset($_REQUEST['stream'])&& isset($_REQUEST['section']) && isset($_REQUEST['semester'])&& isset($_REQUEST['phone'])&& isset($_REQUEST['email'])&& isset($_REQUEST['password'])&& isset($_REQUEST['photo'])) {
+if (isset($_REQUEST['unique_id'])&& isset($_REQUEST['first_name']) && isset($_REQUEST['mid_name'])&& isset($_REQUEST['lastname'])&&isset($_REQUEST['dob'])&&isset($_REQUEST['gender'])&&isset($_REQUEST['stream'])&& isset($_REQUEST['section']) && isset($_REQUEST['semester'])&& isset($_REQUEST['phone'])&& isset($_REQUEST['email'])&& isset($_REQUEST['password'])&& isset($_FILES['file'])) {
     require "../../controllers/Registrationstudent.php";
+    $url = "../../photos/";  
+    $var = $_REQUEST['phone']."_".$_FILES['file']['name'];
+    $furl = $url . $var;
+    move_uploaded_file($_FILES['file']['tmp_name'], $furl);  
+    $path = "/api/photos/";  
+    $filepath = $path.$var; 
 
-    $result = Registrationstudent::create($_REQUEST['unique_id'],$_REQUEST['firstname'],$_REQUEST['midname'],$_REQUEST['lastname'],$_REQUEST['dob'],$_REQUEST['gender'],$_REQUEST['stream'],$_REQUEST['section'],$_REQUEST['semester'],$_REQUEST['phone'],$_REQUEST['email'],$_REQUEST['password'],$_REQUEST['photo']);
+    $result = Registrationstudent::create($_REQUEST['unique_id'],$_REQUEST['first_name'],$_REQUEST['mid_name'],$_REQUEST['lastname'],$_REQUEST['dob'],$_REQUEST['gender'],$_REQUEST['stream'],$_REQUEST['section'],$_REQUEST['semester'],$_REQUEST['phone'],$_REQUEST['email'],$_REQUEST['password'],$filepath);
     
     if($result){
         echo json_encode(
