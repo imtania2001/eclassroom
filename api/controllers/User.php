@@ -23,35 +23,35 @@ class User
                     $result = $conn->query($sql);
                     if (!$result || !$result->num_rows)
                         return false;
-                    $_SESSION['admin'] = $result->fetch_assoc();
-                    $user = $result->fetch_assoc();
+                        $user = $result->fetch_assoc();
+                    $_SESSION['admin'] = $user;
                     return array("login" => true, "role" => $role, "user" => $user, "message" => "Login Successfull");
                 } else if ($role == "teacher") {
-                    $sql = "SELECT `id`, `unique_id`, `firstname`, `midname`, `Lastname`, `dob`, `gender`, `bca`, `bba`, `mca`, `msc`, `phone`, `email`, `photo` FROM `techers` WHERE `email_id`='$email_id' AND `password`='$password'";
+                    $sql = "SELECT `id`, `unique_id`, `firstname`, `midname`, `Lastname`, `dob`, `gender`, `bca`, `bba`, `mca`, `msc`, `phone`, `email`, `photo` FROM `teachers` WHERE `email`='$email_id' AND `password`='$password'";
+
                     $result = $conn->query($sql);
                     if (!$result || !$result->num_rows)
                         return false;
-                    $_SESSION['teacher'] = $result->fetch_assoc();
-                    $user = $result->fetch_assoc();
+                        $user = $result->fetch_assoc();
+                    $_SESSION['teacher'] = $user;
                     return array("login" => true, "role" => $role, "user" => $user, "message" => "Login Successfull");
                 } else if ($role == "student") {
                     $sql = "SELECT `id`, `name`, `roll_number`, `email_id`, `mobile_number`, `dob`, `stream`, `semester`, `section`, `batch`, `created_at`, `updated_at`, `photo` FROM `students` WHERE `email_id`='$email_id' AND `password`='$password'";
                     $result = $conn->query($sql);
                     if (!$result || !$result->num_rows)
                         return false;
-                    $_SESSION['student'] = $result->fetch_assoc();
-                    $user = $result->fetch_assoc();
+                        $user = $result->fetch_assoc();
+                    $_SESSION['student'] = $user;
                     return array("login" => true, "role" => $role, "user" => $user, "message" => "Login Successfull");
                 } else {
                     return false;
                 }
-                
             }
             return array("login" => false, "message" => "Invalid Credentials");
         }
         return false;
     }
-    public static function addusers($email_id,$role)
+    public static function addusers($email_id, $role)
     {
         $config = Mysql::config();
         $conn = new mysqli($config[0], $config[1], $config[2], $config[3]);
@@ -61,7 +61,7 @@ class User
         // Checking whether the user already exists or not
         $sql = "SELECT * FROM `login` WHERE `email_id`='$email_id'";
         $result = $conn->query($sql);
-        if($result && $result->num_rows){
+        if ($result && $result->num_rows) {
             return false;
         }
 
@@ -73,40 +73,40 @@ class User
         else
             return false;
     }
-//view users
-public static function viewallusers(){
-    $config = Mysql::config();
-    $conn = new mysqli($config[0], $config[1], $config[2], $config[3]);
-    if (!$conn)
-        return false;
-
-    $sql = "SELECT `id`,`email_id`,`role` FROM `login`";
-    $result = $conn->query($sql);
-    if ($result)
+    //view users
+    public static function viewallusers()
     {
-        $total = $result->num_rows;
-        $arr = [];
-        while($row=$result->fetch_assoc()){
-            $arr[] = $row;
-        }
-        return array("total"=>$total,"row"=>$arr);
-    }
-    else
-        return false;
-}
-//delete users
-public static function deleteusers($id){
-    $config = Mysql::config();
-    $conn = new mysqli($config[0], $config[1], $config[2], $config[3]);
-  if (!$conn)
-     return false;
+        $config = Mysql::config();
+        $conn = new mysqli($config[0], $config[1], $config[2], $config[3]);
+        if (!$conn)
+            return false;
 
-   $sql = "DELETE FROM `login` WHERE `id`='$id' ";
-    $result = $conn->query($sql);
-   if ($result)
-      return true;
- 
-   else
-       return false;
-}
+        $sql = "SELECT `id`,`email_id`,`role` FROM `login`";
+        $result = $conn->query($sql);
+        if ($result) {
+            $total = $result->num_rows;
+            $arr = [];
+            while ($row = $result->fetch_assoc()) {
+                $arr[] = $row;
+            }
+            return array("total" => $total, "row" => $arr);
+        } else
+            return false;
+    }
+    //delete users
+    public static function deleteusers($id)
+    {
+        $config = Mysql::config();
+        $conn = new mysqli($config[0], $config[1], $config[2], $config[3]);
+        if (!$conn)
+            return false;
+
+        $sql = "DELETE FROM `login` WHERE `id`='$id' ";
+        $result = $conn->query($sql);
+        if ($result)
+            return true;
+
+        else
+            return false;
+    }
 }

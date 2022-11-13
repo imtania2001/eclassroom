@@ -2,6 +2,7 @@ $(document).ready(function () {
     getFacultyClassesByIdHTML();
 });
 
+
 function getFacultyClassesByIdHTML() {
     let html = `<table class="table table-hover">
     <thead>
@@ -337,8 +338,8 @@ async function createClassAPI() {
     let classlink=document.getElementById("classlink").value;
     let section=document.getElementById("section").value;
     var form = new FormData();
-    form.append("faculty_id", "1");
-    form.append("faculty_name", "subrata saha");
+    form.append("faculty_id", login_user.id);
+    form.append("faculty_name", login_user.firstname+" "+login_user.midname+" "+login_user.Lastname);
     form.append("stream", stream);
     form.append("sem", semester);
     form.append("subject", subject);
