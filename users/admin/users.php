@@ -55,7 +55,7 @@
                     <div class="row d-flex flex-wrap justify-content-evenly">
                         <div class="col-sm-5 card">
                             <div class="card-body">
-                                <h4 class="card-title">Registered Users : <span>0</span></h4>
+                                <h4 class="card-title">Registered Users : <span id="fetch_users_total">0</span></h4>
                                 <div class="table-responsive">
                                     <table class="table table-hover">
                                         <thead>
@@ -64,16 +64,11 @@
                                             <th>Role</th>
                                             <th>Remove</th>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>tania@gmail.com</td>
-                                                <td>student</td>
-                                                <td><button class="btn btn-danger"><i
-                                                            class="fa-solid fa-trash"></i></button></td>
-                                            </tr>
+                                        <tbody id="fetch_users">
+                                            
                                         </tbody>
                                     </table>
+                                    <p class="text-center text-muted" id="fetch_users_message"></p>
                                 </div>
                             </div>
                         </div>

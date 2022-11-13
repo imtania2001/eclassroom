@@ -80,7 +80,7 @@ public static function viewallusers(){
     if (!$conn)
         return false;
 
-    $sql = "SELECT * FROM `login`";
+    $sql = "SELECT `id`,`email_id`,`role` FROM `login`";
     $result = $conn->query($sql);
     if ($result)
     {
