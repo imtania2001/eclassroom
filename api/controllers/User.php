@@ -23,7 +23,7 @@ class User
                     $result = $conn->query($sql);
                     if (!$result || !$result->num_rows)
                         return false;
-                        $user = $result->fetch_assoc();
+                    $user = $result->fetch_assoc();
                     $_SESSION['admin'] = $user;
                     return array("login" => true, "role" => $role, "user" => $user, "message" => "Login Successfull");
                 } else if ($role == "teacher") {
@@ -32,7 +32,7 @@ class User
                     $result = $conn->query($sql);
                     if (!$result || !$result->num_rows)
                         return false;
-                        $user = $result->fetch_assoc();
+                    $user = $result->fetch_assoc();
                     $_SESSION['teacher'] = $user;
                     return array("login" => true, "role" => $role, "user" => $user, "message" => "Login Successfull");
                 } else if ($role == "student") {
@@ -40,7 +40,7 @@ class User
                     $result = $conn->query($sql);
                     if (!$result || !$result->num_rows)
                         return false;
-                        $user = $result->fetch_assoc();
+                    $user = $result->fetch_assoc();
                     $_SESSION['student'] = $user;
                     return array("login" => true, "role" => $role, "user" => $user, "message" => "Login Successfull");
                 } else {
@@ -51,6 +51,7 @@ class User
         }
         return false;
     }
+
     public static function addusers($email_id, $role)
     {
         $config = Mysql::config();
@@ -67,7 +68,7 @@ class User
 
         $sql = "INSERT INTO `login`(`email_id`,  `role`) VALUES ('$email_id',  '$role')";
         $result = $conn->query($sql);
-        return $result;
+        // return $result;
         if ($result)
             return true;
         else
@@ -93,6 +94,7 @@ class User
         } else
             return false;
     }
+
     //delete users
     public static function deleteusers($id)
     {
@@ -107,6 +109,48 @@ class User
             return true;
 
         else
+            return false;
+    }
+
+    //view Teacher
+    public static function viewAllTeacher()
+    {
+        $config = Mysql::config();
+        $conn = new mysqli($config[0], $config[1], $config[2], $config[3]);
+        if (!$conn)
+            return false;
+
+        $sql = "SELECT `id`, `unique_id`, `firstname`, `midname`, `Lastname`, `dob`, `gender`, `phone`, `email`, `photo` FROM `teachers` WHERE 1";
+        $result = $conn->query($sql);
+        if ($result) {
+            $total = $result->num_rows;
+            $arr = [];
+            while ($row = $result->fetch_assoc()) {
+                $arr[] = $row;
+            }
+            return array("total" => $total, "row" => $arr);
+        } else
+            return false;
+    }
+
+    //view Student
+    public static function viewAllStudent()
+    {
+        $config = Mysql::config();
+        $conn = new mysqli($config[0], $config[1], $config[2], $config[3]);
+        if (!$conn)
+            return false;
+
+        $sql = "SELECT `id`, `name`, `roll_number`, `email_id`, `mobile_number`, `dob`, `stream`, `semester`, `batch`, `photo` FROM `students` WHERE 1";
+        $result = $conn->query($sql);
+        if ($result) {
+            $total = $result->num_rows;
+            $arr = [];
+            while ($row = $result->fetch_assoc()) {
+                $arr[] = $row;
+            }
+            return array("total" => $total, "row" => $arr);
+        } else
             return false;
     }
 }

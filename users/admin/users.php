@@ -75,24 +75,28 @@
                         <div class="col-sm-5 card">
                             <div class="card-body">
                                 <h4 class="card-title">Add a New User</h4>
-                                <form class="row g-3 m-auto">
+                                <div class="row g-3 m-auto">
                                     <div class="col-md-6">
                                         <label for="inputuser" class="form-label">Usertype</label>
-                                        <input type="user" oninput="removerBorderDanger(this);" class="form-control" id="usertype">
+                                        <select  class="form-control" id="usertype"onchange="removerBorderDanger(this);">
+                                            <option value="">Choose Role</option>
+                                            <option value="student">Student</option>
+                                            <option value="teacher">Teacher</option>
+                                        </select>
                                         <label for="inputEmail4" class="form-label">Email</label>
-                                        <input type="email" oninput="removerBorderDanger(this);" class="form-control" id="email">
+                                        <input type="email" placeholder="Enter Email Id" oninput="removerBorderDanger(this);" class="form-control" id="email">
                                     </div>
                                     <div class="col-12">
                                         <button type="button" onclick="addUser();" class="btn btn-primary">Submit</button>
                                     </div>
-                                </form>
+</div>
                             </div>
                         </div>
                     </div>
                     <div class="row d-flex flex-wrap justify-content-evenly">
                         <div class="col-sm-11 card">
                             <div class="card-body">
-                                <h4 class="card-title">All Teachers : <span>(0)</span></h4>
+                                <h4 class="card-title">All Teachers : <span id="fetch_teacher_total">0</span></h4>
                                 <div class="table-responsive">
                                     <table class="table table-hover">
                                         <thead>
@@ -104,18 +108,11 @@
                                             <th>DOB</th>
                                             <th>Gender</th>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>15201220056</td>
-                                                <td>Tania Ghosh</td>
-                                                <td>1497648694</td>
-                                                <td>tania@gmail.com</td>
-                                                <td>10-56-2500</td>
-                                                <td>Female</td>
-                                            </tr>
+                                        <tbody id="fetch_teacher">
+                                            
                                         </tbody>
                                     </table>
+                                    <p class="text-center text-muted" id="fetch_teacher_message"></p>
                                 </div>
                             </div>
                         </div>
@@ -123,7 +120,7 @@
                     <div class="row d-flex flex-wrap justify-content-evenly">
                         <div class="col-sm-11 card">
                             <div class="card-body">
-                                <h4 class="card-title">All Students : <span>(0)</span></h4>
+                                <h4 class="card-title">All Students : <span id="fetch_student_total">0</span></h4>
                                 <div class="table-responsive">
                                     <table class="table table-hover">
                                         <thead>
@@ -133,26 +130,14 @@
                                             <th>Mobile</th>
                                             <th>Email</th>
                                             <th>DOB</th>
-                                            <th>Gender</th>
                                             <th>Stream</th>
                                             <th>Semester</th>
                                             <th>Batch</th>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>15201220056</td>
-                                                <td>Tania Ghosh</td>
-                                                <td>1497648694</td>
-                                                <td>tania@gmail.com</td>
-                                                <td>10-56-2500</td>
-                                                <td>Female</td>
-                                                <td>Bca</td>
-                                                <td>Semester 1</td>
-                                                <td>2020</td>
-                                            </tr>
+                                        <tbody id="fetch_student">
                                         </tbody>
                                     </table>
+                                    <p class="text-center text-muted" id="fetch_student_message"></p>
                                 </div>
                             </div>
                         </div>
