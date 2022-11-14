@@ -2,6 +2,7 @@
 $("#login_form").submit(async function (e) {
 
     e.preventDefault();
+    // alert("Hello");
     let email_id = document.getElementById("email_id").value;
     let password = document.getElementById("password").value;
 
@@ -19,6 +20,7 @@ $("#login_form").submit(async function (e) {
     };
 
     $.ajax(settings).done(function (data) {
+        console.log(data);
         if (data.status_code == 1200) {
             let arr = data.data;
             if (arr.login) {
@@ -46,42 +48,43 @@ $("#login_form").submit(async function (e) {
         }
     });
 
-    // Here API Path is set from the root of server ( / )
-    // $.ajax({
-    //     "url": "/api/v1/users/login.php",
-    //     "method": "POST",
-    //     "data": {
-    //         email: email_id,
-    //         password: password,
-    //     }
-    // }).done(function (data) {
-    //     console.log(data);
-    //     if (data.status_code == 1200) {
-    //         let arr = data.data;
-    //         if (arr.login) {
-    //             if (arr.role == "student") {
-    //                 alert(arr.message);
-    //                 window.location = "users/student/";
-    //                 sessionStorage.setItem("user", arr.user);
-    //             } else if (arr.role == "teacher") {
-    //                 alert(arr.message);
-    //                 window.location = "users/teacher/";
-    //                 sessionStorage.setItem("user", arr.user);
-    //             } else if (arr.role == "admin") {
-    //                 alert(arr.message);
-    //                 window.location = "users/admin/";
-    //                 sessionStorage.setItem("user", arr.user);
-    //             } else {
-    //                 alert("An Error Occured");
-    //                 window.location.reload();
-    //             }
-    //         } else {
-    //             alert(arr.message);
-    //         }
-    //     } else {
-    //         alert(data.message);
-    //     }
-    // });
+});
+//signup API Integration
+$("#signup_form").submit(async function (e) {
+
+    e.preventDefault();
+    let email_id = document.getElementById("email_id").value;
+    var form = new FormData();
+    form.append("email_id", email_id);
+    
+    var settings = {
+      "url": "/api/v1/users/checkUser.php",
+      "method": "POST",
+      "timeout": 0,
+      "processData": false,
+      "contentType": false,
+      "data": form
+    };
+    
+    $.ajax(settings).done(function (response) {
+      console.log(response);
+    if(response.status_code == 1200){
+        if(response.data.login_code == 100){
+            let role = response.data.role;
+            sessionStorage.setItem('user_role', role);
+            if(role == "teacher"){
+                window.location.replace("/teacher_signup.php");
+            }else if(role=="student"){
+                window.location.replace("/student_signup.php");
+            }else{
+                alert("Some Error Occured");
+            }
+        }
+    }else{
+        // Error
+        alert("Some Error Occured");
+    }
+    });
 
 });
 
@@ -190,7 +193,7 @@ async function studentRegistration() {
     $.ajax(settings).done(function (response) {
         if (response.status_code == 1200) {
             alert(response.message);
-            window.location.reload();
+            window.location.assign("/signup.php");
         } else {
             alert("Some Error Occured");
         }

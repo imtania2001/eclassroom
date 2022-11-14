@@ -19,8 +19,8 @@
             <h3>Login Now</h3>
             <input type="email" id="email_id" name="email" required placeholder="Enter your email">
             <input type="password" id="password" name="password" required placeholder="Enter your password">
-            <input type="submit" name="submit" value="login now" class="form-btn">
-            <p>Don't Have an Account? <a href="teacher_signup.php">register now</a></p>
+            <input type="submit" name="submit" value="Login now" class="form-btn">
+            <p>Don't Have an Account? <a href="signup.php">Signup</a></p>
         </form>
 
     </div>

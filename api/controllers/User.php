@@ -1,10 +1,42 @@
 <?php
 require("Mysql.php");
+// session_start();
+session_start();
 class User
 {
+    public static function checkUser($email_id)
+    {
+        $config = Mysql::config();
+        $conn = new mysqli($config[0], $config[1], $config[2], $config[3]);
+        if (!$conn)
+            return false;
+
+        $sql = "SELECT * FROM `login` WHERE `email_id`='$email_id'";
+        $result = $conn->query($sql);
+        if(!$result){
+            return false;
+        }
+
+        if($result->num_rows){
+            $user = $result->fetch_assoc();
+            if($user['status'] == 0){
+                $role = $user['role'];
+                $email_id = $user['email_id'];
+                $_SESSION['user_role'] = $role;
+                $_SESSION['user_email'] = $email_id;
+                return array("login_code"=>100, "role" => $role, "email_id"=>$email_id);
+            }else{
+                return array("login_code"=>101, "message"=>"You are already registered");
+            }
+        }else{
+            return array("login_code"=>101, "message" => "You don't have access for registration");
+        }
+
+    }
+
     public static function login($email_id, $password)
     {
-        session_start();
+        // session_start();
         $config = Mysql::config();
         $conn = new mysqli($config[0], $config[1], $config[2], $config[3]);
         if (!$conn)
@@ -27,7 +59,7 @@ class User
                     $_SESSION['admin'] = $user;
                     return array("login" => true, "role" => $role, "user" => $user, "message" => "Login Successfull");
                 } else if ($role == "teacher") {
-                    $sql = "SELECT `id`, `unique_id`, `firstname`, `midname`, `Lastname`, `dob`, `gender`, `bca`, `bba`, `mca`, `msc`, `phone`, `email`, `photo` FROM `teachers` WHERE `email`='$email_id' AND `password`='$password'";
+                    $sql = "SELECT `id`, `unique_id`, `firstname`, `midname`, `Lastname`, `dob`, `gender`, `phone`, `email`, `photo` FROM `teachers` WHERE `email`='$email_id' AND `password`='$password'";
 
                     $result = $conn->query($sql);
                     if (!$result || !$result->num_rows)
@@ -36,7 +68,7 @@ class User
                     $_SESSION['teacher'] = $user;
                     return array("login" => true, "role" => $role, "user" => $user, "message" => "Login Successfull");
                 } else if ($role == "student") {
-                    $sql = "SELECT `id`, `name`, `roll_number`, `email_id`, `mobile_number`, `dob`, `stream`, `semester`, `section`, `batch`, `created_at`, `updated_at`, `photo` FROM `students` WHERE `email_id`='$email_id' AND `password`='$password'";
+                    $sql = "SELECT  `id`, `unique_id`, `first_name`, `mid_name`, `lastname`, `dob`, `gender`, `stream`, `section`, `semester`, `phone`, `email`, `photo` FROM `students` WHERE `email`='$email_id' AND `password`='$password'";
                     $result = $conn->query($sql);
                     if (!$result || !$result->num_rows)
                         return false;

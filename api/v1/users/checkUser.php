@@ -17,31 +17,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
         header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
 }
 header('Content-type: application/json');
-if (isset($_REQUEST['unique_id'])&& isset($_REQUEST['firstname']) && isset($_REQUEST['midname'])&& isset($_REQUEST['Lastname'])&&isset($_REQUEST['dob'])&&isset($_REQUEST['gender'])&& isset($_REQUEST['msc'])&& isset($_REQUEST['phone'])&& isset($_REQUEST['email'])&& isset($_REQUEST['password'])&& isset($_FILES['file'])) {
-    require "../../controllers/Registration.php";
-    $url = "../../photos/";  
-    $var = $_REQUEST['phone']."_".$_FILES['file']['name'];
-    $furl = $url . $var;
-    move_uploaded_file($_FILES['file']['tmp_name'], $furl);  
-    $path = "/api/photos/";  
-    $filepath = $path.$var; 
+if (isset($_REQUEST['email_id'])) {
+    require "../../controllers/User.php";
 
-    $result = Registration::create($_REQUEST['unique_id'],$_REQUEST['firstname'],$_REQUEST['midname'],$_REQUEST['Lastname'],$_REQUEST['dob'],$_REQUEST['gender'],$_REQUEST['phone'],$_REQUEST['email'],$_REQUEST['password'],$filepath);
+    $result = User::checkUser($_REQUEST['email_id']);
     
     if($result){
         echo json_encode(
             array(
                 "status" => "success", 
                 "status_code" => "1200" , 
-                "message" => "Registration successful"
+                "data" => $result
             )
         );
     }else{
-        echo json_encode(array('status' => 'success', 'status_code' => 1300, "message" => "Error Occured"));
+        echo json_encode(array('status' => 'success', 'status_code' => 1300 , "message"=> "An Error Occurred"));
     }
     
 }else{
     echo json_encode(array('status' => 'error', 'status_code' => 1400,  'message' => 'PARAMS NOT FOUND'));
 }
-
-?>

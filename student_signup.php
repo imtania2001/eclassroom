@@ -1,3 +1,11 @@
+<?php
+session_start();
+ob_start();
+if ($_SESSION['user_role'] != "student") {
+    header("Location: /signup.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,29 +35,28 @@
                 <option value="others">Others</option>
             </select>
             <select id="stream">
-                <option value="bca">BCA</option>
-                <option value="bba">BBA</option>
-                <option value="mca">MCA</option>
-                <option value="msc">Msc.</option>
+                <option value="BCA">BCA</option>
+                <option value="BBA">BBA</option>
+                <option value="MCA">MCA</option>
+                <option value="MSC">Msc.</option>
             </select>
             <select id="semester">
-                <option value="Semester1">Semester1</option>
-                <option value="Semester2">Semester2</option>
-                <option value="Semester3">Semester3</option>
-                <option value="Semester4">Semester4</option>
-                <option value="Semester5">Semester5</option>
-                <option value="Semester6">Semester6</option>
+                <option value="SEM1">Semester 1</option>
+                <option value="SEM2">Semester 2</option>
+                <option value="SEM3">Semester 3</option>
+                <option value="SEM4">Semester 4</option>
+                <option value="SEM5">Semester 5</option>
+                <option value="SEM6">Semester 6</option>
             </select>
             <select id="section">
             <option value="alpha">ALPHA</option>
             <option value="beta">BETA</option>
-            <option value="others">OTHERS</option>
             
          </select>
 
             
             <input type="tel" maxlength="10" id="phone" required placeholder="Mobile Number">
-            <input type="email" id="email" required placeholder="Email Id">
+            <input type="email" id="email" value="<?php echo $_SESSION['user_email']; ?>" readonly required placeholder="Email Id">
             <input type="password" id="password" required placeholder="password">
             <input type="password" id="cpassword" required placeholder="confirm your password">
             <input type="file" id="photo" required placeholder="photo">
@@ -60,6 +67,12 @@
     </div>
 
     <script src="static/js/index.js"></script>
+    <script>
+        let user_role = sessionStorage.getItem('user_role');
+        if(user_role!="student"){
+            window.location.replace("/signup.php");
+        }
+    </script>
 </body>
 
 </html>

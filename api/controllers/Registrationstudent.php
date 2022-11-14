@@ -13,8 +13,12 @@ class Registrationstudent
         $sql = "INSERT INTO `students` (`unique_id`, `first_name`, `mid_name`, `lastname`, `dob`, `gender`, `stream`, `section`, `semester`,`phone`,`email`,`password`,`photo`) VALUES ( '$unique_id','$first_name','$mid_name', '$lastname', '$dob','$gender' ,'$stream', '$section', '$semester', '$phone','$email','$password','$photo')";
         //return $sql;
         $result = $conn->query($sql);
-        if ($result)
+
+        if ($result){
+            $sql = "UPDATE `login` SET `status`=1, `password`='$password' WHERE `email_id`='$email'";
+            $conn->query($sql);
             return true;
+        }
         else
             return false;
     }
