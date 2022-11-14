@@ -27,7 +27,7 @@ if ($_SESSION['user_role'] != "teacher") {
             <h3>register now</h3>
             <input type="text" id="unique_id" name="Unique_id" required placeholder="Unique_id">
             <input type="text" id="firstname" name="Firstname" required placeholder="Firstname">
-            <input type="text" id="midname" name="midname" required placeholder="midname">
+            <input type="text" id="midname" name="midname"  placeholder="midname">
             <input type="text" id="Lastname" name="Lastname" required placeholder="lastname">
             <input type="date" id="dob" required placeholder="dob">
             <select id="gender">
@@ -35,10 +35,6 @@ if ($_SESSION['user_role'] != "teacher") {
                 <option value="female">Female</option>
                 <option value="others">Others</option>
             </select>
-            <input type="text" id="bba" name="bba" required placeholder="Bba">
-            <input type="text" id="bca" name="bca" required placeholder="Bca">
-            <input type="text" id="mca" name="mca" required placeholder="mca">
-            <input type="text" id="msc" name="msc" required placeholder="msc">
             <input type="number" id="phone" name="phone" required placeholder="phone">
             <input type="email" id="email" name="email" value="<?php echo $_SESSION['user_email']; ?>" readonly required placeholder="email">
             <input type="password" id="password" name="password" required placeholder="password">

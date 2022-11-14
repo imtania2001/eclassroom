@@ -97,14 +97,14 @@ async function teacherRegistration() {
     let Lastname = document.getElementById("Lastname").value;
     let dob = document.getElementById("dob").value;
     let gender = document.getElementById("gender").value;
-    let bba = document.getElementById("bba").value;
-    let bca = document.getElementById("bca").value;
-    let mca = document.getElementById("mca").value;
-    let msc = document.getElementById("msc").value;
     let phone = document.getElementById("phone").value;
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
     let cpassword = document.getElementById("cpassword").value;
+    if(password!=cpassword){
+        alert("Password should be same");
+        return false;
+    }
     let photo = document.getElementById("photo");
 
     var form = new FormData();
@@ -114,10 +114,6 @@ async function teacherRegistration() {
     form.append("Lastname", Lastname);
     form.append("dob", dob);
     form.append("gender", gender);
-    form.append("bba", bba);
-    form.append("bca", bca);
-    form.append("mca", mca);
-    form.append("msc", msc);
     form.append("phone", phone);
     form.append("email", email);
     form.append("file", photo.files[0]);

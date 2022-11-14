@@ -19,7 +19,7 @@ class Registration
             $conn->query($sql);
             return true;
         } else
-            return false;
+            return $sql;
     }
 
     //Registration Edit for teachers

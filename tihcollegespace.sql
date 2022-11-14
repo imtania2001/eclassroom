@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 01, 2022 at 08:04 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: Nov 14, 2022 at 07:53 PM
+-- Server version: 10.4.25-MariaDB
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -49,8 +49,9 @@ CREATE TABLE `admins` (
 CREATE TABLE `login` (
   `id` int(11) NOT NULL,
   `email_id` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
+  `password` varchar(255) DEFAULT NULL,
   `role` varchar(255) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -59,8 +60,11 @@ CREATE TABLE `login` (
 -- Dumping data for table `login`
 --
 
-INSERT INTO `login` (`id`, `email_id`, `password`, `role`, `created_at`, `updated_at`) VALUES
-(1, 'ditipriyasen84@gmail.com', 'ditipriya34', 'student', '2022-10-18 17:06:37', '2022-10-18 17:16:50');
+INSERT INTO `login` (`id`, `email_id`, `password`, `role`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'ronit@gmail.com', '12', 'student', 1, '2022-11-14 17:10:58', '2022-11-14 18:26:58'),
+(2, 'sudipbiswas54@gmail.com', '', 'teacher', 0, '2022-11-14 17:11:21', '2022-11-14 17:11:21'),
+(3, 'ditipriyasen99@gmail.com', '', 'student', 0, '2022-11-14 17:11:31', '2022-11-14 17:11:31'),
+(4, 'tania2001@gmail.com', '00', 'teacher', 1, '2022-11-14 17:11:51', '2022-11-14 18:49:25');
 
 -- --------------------------------------------------------
 
@@ -93,7 +97,8 @@ INSERT INTO `schedule_class` (`id`, `faculty_id`, `faculty_name`, `stream`, `sem
 (5, 'Subrate Saha', 'BCA', 'SEM1', 'Alpha', 'C Programm', 'Introduction to Programming', '21-10-2022', '10:00', '  ', ''),
 (6, '1', 'Subrate Saha', 'BCA', 'SEM1', 'Alpha', 'C Programming', 'Introduction to Programming', '21-10-2022', '10:00', '  '),
 (7, '2', 'subhendu Saha', 'bca', 'sem5', 'alpha', 'networking', 'encoding technique', '21-10-2022', '10.00', ''),
-(8, '2', 'subhendu Saha', 'bca', 'sem5', 'alpha', 'networking', 'encoding technique', '21-10-2022', '10.00', '');
+(8, '2', 'subhendu Saha', 'bca', 'sem5', 'alpha', 'networking', 'encoding technique', '21-10-2022', '10.00', ''),
+(9, '1', 'subrata saha', '1', '2', '', '7', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -162,6 +167,36 @@ INSERT INTO `streams` (`id`, `stream`) VALUES
 
 CREATE TABLE `students` (
   `id` int(11) NOT NULL,
+  `unique_id` varchar(20) NOT NULL,
+  `first_name` varchar(20) NOT NULL,
+  `mid_name` varchar(20) NOT NULL,
+  `lastname` varchar(20) NOT NULL,
+  `dob` varchar(255) NOT NULL,
+  `gender` varchar(10) NOT NULL,
+  `stream` varchar(5) NOT NULL,
+  `section` varchar(5) NOT NULL,
+  `semester` varchar(10) NOT NULL,
+  `phone` varchar(10) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `photo` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `students`
+--
+
+INSERT INTO `students` (`id`, `unique_id`, `first_name`, `mid_name`, `lastname`, `dob`, `gender`, `stream`, `section`, `semester`, `phone`, `email`, `password`, `photo`) VALUES
+(1, '37', 'Ronit', '', 'Singh', '2001-08-03', 'male', 'MCA', 'alpha', 'SEM1', '7003622801', 'ronit@gmail.com', '12', '/api/photos/7003622801_WIN_20211229_11_50_04_Pro.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_backup`
+--
+
+CREATE TABLE `student_backup` (
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `roll_number` varchar(11) NOT NULL,
   `email_id` varchar(255) NOT NULL,
@@ -176,14 +211,6 @@ CREATE TABLE `students` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `photo` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `students`
---
-
-INSERT INTO `students` (`id`, `name`, `roll_number`, `email_id`, `mobile_number`, `dob`, `stream`, `semester`, `section`, `password`, `batch`, `created_at`, `updated_at`, `photo`) VALUES
-(1, 'User1', '15201219026', 'user1@gmail.com', NULL, '03-08-2001', 'bca', 'semester1', 'alpha', '12345', '2022', '2022-10-14 16:24:20', '2022-10-14 16:24:20', NULL),
-(2, 'Ditipriya Sen', '34', 'ditipriyasen84@gmail.com', '7980655884', '01-10-2002', 'bca', 'semester1', 'alpha', 'ditipriya34', '2022', '2022-10-18 17:19:59', '2022-10-18 17:19:59', NULL);
 
 -- --------------------------------------------------------
 
@@ -349,15 +376,42 @@ CREATE TABLE `teachers` (
   `Lastname` varchar(20) NOT NULL,
   `dob` varchar(255) NOT NULL,
   `gender` varchar(10) NOT NULL,
-  `bca` int(10) NOT NULL,
-  `bba` int(11) NOT NULL,
-  `mca` int(11) NOT NULL,
-  `msc` int(11) NOT NULL,
   `phone` varchar(12) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   `photo` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `teachers`
+--
+
+INSERT INTO `teachers` (`id`, `unique_id`, `firstname`, `midname`, `Lastname`, `dob`, `gender`, `phone`, `email`, `password`, `photo`) VALUES
+(2, '1', 'Tania', '', 'Ghosh', '2022-11-15', 'female', '8920657499', 'tania2001@gmail.com', '00', '/api/photos/8920657499_WIN_20211229_11_50_04_Pro.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `updates`
+--
+
+CREATE TABLE `updates` (
+  `id` int(11) NOT NULL,
+  `stream` varchar(10) NOT NULL,
+  `semester` varchar(15) NOT NULL,
+  `title` varchar(150) NOT NULL,
+  `message` varchar(1000) DEFAULT NULL,
+  `file` varchar(250) DEFAULT NULL,
+  `date` varchar(10) NOT NULL,
+  `time` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `updates`
+--
+
+INSERT INTO `updates` (`id`, `stream`, `semester`, `title`, `message`, `file`, `date`, `time`) VALUES
+(1, 'bca', 'sem5', 'absulate program  updated', 'program updated', '', '11/11/2022', '3.00pm');
 
 -- --------------------------------------------------------
 
@@ -427,6 +481,12 @@ ALTER TABLE `streams`
 -- Indexes for table `students`
 --
 ALTER TABLE `students`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `student_backup`
+--
+ALTER TABLE `student_backup`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email_id` (`email_id`);
 
@@ -440,6 +500,12 @@ ALTER TABLE `subjects`
 -- Indexes for table `teachers`
 --
 ALTER TABLE `teachers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `updates`
+--
+ALTER TABLE `updates`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -462,13 +528,13 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `schedule_class`
 --
 ALTER TABLE `schedule_class`
-  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `semesters`
@@ -486,12 +552,24 @@ ALTER TABLE `streams`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `student_backup`
+--
+ALTER TABLE `student_backup`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `teachers`
 --
 ALTER TABLE `teachers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `updates`
+--
+ALTER TABLE `updates`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --

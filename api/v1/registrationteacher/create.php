@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
         header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
 }
 header('Content-type: application/json');
-if (isset($_REQUEST['unique_id'])&& isset($_REQUEST['firstname']) && isset($_REQUEST['midname'])&& isset($_REQUEST['Lastname'])&&isset($_REQUEST['dob'])&&isset($_REQUEST['gender'])&& isset($_REQUEST['msc'])&& isset($_REQUEST['phone'])&& isset($_REQUEST['email'])&& isset($_REQUEST['password'])&& isset($_FILES['file'])) {
+if (isset($_REQUEST['unique_id'])&& isset($_REQUEST['firstname']) && isset($_REQUEST['midname'])&& isset($_REQUEST['Lastname'])&&isset($_REQUEST['dob'])&&isset($_REQUEST['gender'])&& isset($_REQUEST['phone'])&& isset($_REQUEST['email'])&& isset($_REQUEST['password'])&& isset($_FILES['file'])) {
     require "../../controllers/Registration.php";
     $url = "../../photos/";  
     $var = $_REQUEST['phone']."_".$_FILES['file']['name'];
@@ -33,7 +33,8 @@ if (isset($_REQUEST['unique_id'])&& isset($_REQUEST['firstname']) && isset($_REQ
             array(
                 "status" => "success", 
                 "status_code" => "1200" , 
-                "message" => "Registration successful"
+                "message" => "Registration successful",
+                "query" => $result
             )
         );
     }else{
