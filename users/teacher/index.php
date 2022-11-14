@@ -1,3 +1,6 @@
+<?php
+    require 'auth.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,11 +22,11 @@
         <div class="topdesign">
         </div>
         <div class="action">
-            <div class="profile" onclick="toggle();">
-                <img src="../../static/images/logo.png" alt="">
+            <div class="profile" id="profile" onclick="toggle();">
+                
             </div>
             <div class="menu">
-                <h3>Tania Ghosh <br>
+                <h3 id="login_user_name"><br>
                     <span>Teacher</span>
                 </h3>
                 <ul>

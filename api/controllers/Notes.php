@@ -44,7 +44,7 @@ class Notes
         if (!$conn)
             return false;
 
-        $sql = "SELECT * FROM `update_notes` WHERE `stream`='$stream' AND `sem`='$sem' AND `section`='$section'";
+        $sql = "SELECT * FROM `upload_notes` WHERE `stream`='$stream' AND `sem`='$sem' AND `section`='$section'";
         $result = $conn->query($sql);
         if ($result) {
             $total = $result->num_rows;
@@ -66,7 +66,7 @@ class Notes
         if (!$conn)
             return false;
 
-        $sql = "DELETE FROM `update_notes` WHERE `id`='$id' ";
+        $sql = "DELETE FROM `upload_notes` WHERE `id`='$id' ";
         $result = $conn->query($sql);
         if ($result)
             return true;
