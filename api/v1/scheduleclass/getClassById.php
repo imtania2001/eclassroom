@@ -19,15 +19,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 header('Content-type: application/json');
 if (isset($_REQUEST['id'])) {
     require "../../controllers/Schedule.php";
-    $result = Schedule::delete($_REQUEST['id']);
+
+    $result = Schedule::getClassById($_REQUEST['id']);
 
 
     if ($result) {
         echo json_encode(
             array(
                 "status" => "success",
-                "status_code" => 1200,
-                "message" => "Class Deleted"
+                "status_code" => "1200",
+                "data" => $result
             )
         );
     } else {

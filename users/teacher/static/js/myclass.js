@@ -15,18 +15,17 @@ function getFacultyClassesByIdHTML() {
       <th>Subject</th>
       <th>Topic</th>
       <th>Link</th>
-      <th>Edit</th>
       <th>Delete</th>
     </thead>
     <tbody id="fetch_class">
 
     </tbody>
-  </table>`;
+  </table>
+  <p id="fetch_class_message" class="text-center text-muted"></p>
+  `;
     document.getElementById("myclass-container").innerHTML = html;
     document.getElementById("show-table").disabled = true;
     document.getElementById("show-form").disabled = false;
-
-
 
     var form = new FormData();
     form.append("id", login_user.id);
@@ -45,6 +44,10 @@ function getFacultyClassesByIdHTML() {
         if (response.status_code == 1200) {
             let arr = response.data.row;
             let total = response.data.total;
+            document.getElementById("total_class").innerHTML = `(${total})`;
+            if (!total) {
+                document.getElementById("fetch_class_message").innerHTML = `No Data Found`;
+            }
             tbody = ``;
             for (let i = 0; i < total; i++) {
                 stream = arr[i].stream;
@@ -84,11 +87,6 @@ function getFacultyClassesByIdHTML() {
                             <a href="${arr[i].classlink}" target="_blank"><button class="btn btn-warning">
                                 <i class="fa-solid fa-link"></i>
                             </button></a>
-                            </td>
-                            <td>
-                            <button class="btn btn-secondary" onclick="showEditClassForm('${arr[i].id}');">
-                                <i class="fa-sharp fa-solid fa-pen-to-square"></i>
-                            </button>
                             </td>
                             <td>
                             <button class="btn btn-danger" onclick="deleteClass('${arr[i].id}');">
@@ -216,26 +214,16 @@ function showEditClassForm(id = "") {
                             <div class="form-group col-sm-6 my-2">
                                 <label class="text-dark px-2">Select Stream</label>
                                 <div class="col-sm-9">
-                                    <select id="stream" class="form-control">
+                                    <select id="stream" class="form-control" onchange="fetchSemester();">
                                         <option value="" selected disabled>Choose Stream</option>
-                                        <option value="BCA">BCA</option>
-                                        <option value="BBA">BBA</option>
-                                        <option value="MCA">MCA</option>
-                                        <option value="MSC">MSC</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group col-sm-6 my-2">
                                 <label class="text-dark px-2">Select Semester</label>
                                 <div class="col-sm-9">
-                                    <select id="semester" class="form-control">
+                                    <select id="semester" class="form-control" onchange="fetchSubject();">
                                         <option value="" selected disabled>Choose Semester</option>
-                                        <option value="Semester 1">Semester 1</option>
-                                        <option value="Semester 2">Semester 2</option>
-                                        <option value="Semester 3">Semester 3</option>
-                                        <option value="Semester 4">Semester 4</option>
-                                        <option value="Semester 5">Semester 5</option>
-                                        <option value="Semester 6">Semester 6</option>
                                     </select>
                                 </div>
                             </div>
@@ -255,8 +243,6 @@ function showEditClassForm(id = "") {
                                 <div class="col-sm-9">
                                     <select id="subject" class="form-control">
                                         <option value="" selected disabled>Choose Subject</option>
-                                        <option value="C Language">C Language</option>
-                                        <option value="C++ Language">C++ Language</option>
                                     </select>
                                 </div>
                             </div>
@@ -296,6 +282,91 @@ function showEditClassForm(id = "") {
     document.getElementById("myclass-container").innerHTML = html;
     document.getElementById("show-table").disabled = false;
     document.getElementById("show-form").disabled = false;
+    // Fetching Streams
+    $.ajax({
+        "url": "/api/v1/data/getAllStream.php",
+        "method": "POST",
+        "timeout": 0,
+    }).done(function (response) {
+        console.log(response);
+        if (response["status_code"] == 1200) {
+            // console.log(response["data"]);
+            let total_record = response["data"].total;
+            let arr = response["data"].streams;
+            let content = `<option value="" selected disabled>Select Stream</option>`;
+            for (let i = 0; i < total_record; i++) {
+                content += `<option value="${arr[i].id}">${arr[i].stream}</option>`;
+            }
+            document.getElementById("stream").innerHTML = content;
+        } else {
+            console.log(["message"]);
+            alert("Some Error Occured");
+            window.location.reload();
+        }
+    });
+
+    // Fetching Data
+
+    var form = new FormData();
+    form.append("id", id);
+
+    var settings = {
+        "url": "/api/v1/scheduleclass/getClassById.php",
+        "method": "POST",
+        "timeout": 0,
+        "processData": false,
+        "contentType": false,
+        "data": form
+    };
+
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+        if (response["status_code"] == 1200) {
+            // console.log(response["data"]);
+            let total_record = response["data"].total;
+            let arr = response["data"].row;
+            document.getElementById("stream").value = arr[0].stream;
+            var form = new FormData();
+            form.append("stream_id", arr[0].stream);
+            var settings = {
+                "url": "/api/v1/data/getSemesterByStreamId.php",
+                "method": "POST",
+                "timeout": 0,
+                "processData": false,
+                "contentType": false,
+                "data": form
+            };
+
+            document.getElementById("semester").innerHTML = `<option value="" selected disabled>Loading...!!!</option>`;
+
+            $.ajax(settings).done(function (response) {
+                console.log(response);
+                if (response.status_code == "1200") {
+                    let total_record = response.data.total;
+                    let arr = response.data.semesters;
+                    let content = `<option value="" selected disabled>Select Semester</option>`;
+                    for (let i = 0; i < total_record; i++) {
+                        content += `<option value="${arr[i].id}">${arr[i].sem}</option>`;
+                    }
+                    document.getElementById("semester").innerHTML = content;
+                } else {
+                    console.log(response["message"]);
+                }
+            });
+            document.getElementById("subject").value = arr[0].subject;
+            document.getElementById("section").value = arr[0].section;
+            document.getElementById("date").value = arr[0].date;
+            document.getElementById("topic").value = arr[0].topic;
+            document.getElementById("time").value = arr[0].time;
+            document.getElementById("classlink").value = arr[0].classlink;
+
+        } else {
+            console.log(["message"]);
+            alert("Some Error Occured");
+            window.location.reload();
+        }
+
+    });
 }
 
 function cancelFormEdit() {
@@ -303,19 +374,43 @@ function cancelFormEdit() {
     showEditClassForm(id);
 }
 
-function deleteClass(id = "") {
+async function deleteClass(id) {
     let val = confirm("Are you sure, You want to delete the class?");
-    if (val) {
-        getFacultyClassesByIdHTML();
+    if (!val) {
+        return false;
     }
+
+    var form = new FormData();
+    form.append("id", id);
+
+    var settings = {
+        "url": "/api/v1/scheduleclass/delete.php",
+        "method": "POST",
+        "timeout": 0,
+        "processData": false,
+        "contentType": false,
+        "data": form
+    };
+
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+        if (response.status_code == 1200) {
+            alert("Class Deleted");
+        } else {
+            alert("An Error Occured");
+            window.location.reload();
+        }
+    });
+
+
 }
 
 
 // Fetching All Semester by Stream Id -------------------------------------------------
-function fetchSemester() {
-    let stream_id = document.getElementById("stream").value;
+async function fetchSemester(stream_id = 0) {
+    if (stream_id == 0)
+        stream_id = document.getElementById("stream").value;
     var form = new FormData();
-    form.append("stream_id", stream_id);
     form.append("stream_id", stream_id);
     var settings = {
         "url": "/api/v1/data/getSemesterByStreamId.php",
@@ -346,7 +441,7 @@ function fetchSemester() {
 
 //Fetch all subject by semesterId----------------------------------------------
 
-function fetchSubject() {
+async function fetchSubject() {
     let semesters_id = document.getElementById("semester").value;
     var form = new FormData();
     form.append("semesters_id", semesters_id);
