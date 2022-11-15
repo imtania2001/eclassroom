@@ -23,16 +23,6 @@ function getAllUpdateHTML() {
   document.getElementById("updates-container").innerHTML = html;
   document.getElementById("show-table").disabled = true;
   document.getElementById("show-form").disabled = false;
-  // document.getElementById("stream").innerHTML = `<option value="" disabled>Loading...!!!</option>`;
-  // Integrate the API HERE or Call the Function for teacher
-  // var form = new FormData();
-  // form.append("stream", "bca");
-  // form.append("semester", "sem5");
-  // form.append("title", "absulate program  updated");
-  // form.append("message", "program updated");
-  // form.append("file", fileInput.files[0], "/C:/Users/Ditipriya Sen/OneDrive/Documents/absulate.c");
-  // form.append("date", "11/11/2022");
-  // form.append("time", "3.00pm");
   
   var settings = {
     "url": "/api/v1/update/view.php",
@@ -269,7 +259,7 @@ async function createUpdateAPI() {
   form.append("time", "3.00pm");
   
   var settings = {
-    "url": "localhost/api/v1/update/create.php",
+    "url": "/api/v1/update/create.php",
     "method": "POST",
     "timeout": 0,
     "processData": false,
@@ -294,7 +284,7 @@ function deleteUpdate(id = "") {
 form.append("id", "2");
 
 var settings = {
-  "url": "http://localhost/api/v1/update/delete.php",
+  "url": "/api/v1/update/delete.php",
   "method": "POST",
   "timeout": 0,
   "processData": false,
