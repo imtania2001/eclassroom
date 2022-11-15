@@ -1,3 +1,6 @@
+<?php
+require 'auth.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,17 +49,63 @@
 
             <section class="page-container">
                 <section class="page-content">
-                    <div id="change-uploadnotes">
+                    <div class="row">
+                        <div class="col-sm-4 px-5 ">
+                            <div class="row row-cols-1 row-cols-md-1 g-2">
+                                <div class="col">
+                                    <div class="card bg-transparent" style=" box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);">
+                                        <img src="<?php echo $_SESSION['student']['photo']; ?>" id="profile_img" class="card-img-top py-3 " alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title fw-bold"><?php echo $_SESSION['student']['first_name']." ".$_SESSION['student']['mid_name']." ".$_SESSION['student']['lastname']; ?></h5>
+                                            <p class="card-text m-0 text-center">
+                                            <p class="m-0 p-1"><span class="fw-bold">Mobile : </span> <?php echo $_SESSION['student']['phone']; ?></p>
+                                            <p class="m-0 p-1"><span class="fw-bold">Email : </span> <?php echo $_SESSION['student']['email']; ?></p>
+                                            <p class="m-0 p-1"><span class="fw-bold">D.O.B : </span> <?php echo $_SESSION['student']['dob']; ?></p>
+                                            <button class="btn btn-success w-100 my-2">Edit Profile</button>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                        <?php
-                        // include 'uploadnoteslist.php' 
-                        ?>
-
+                        <div class="col-sm-8 px-5 py-5">
+                            <div class="row row-cols-1 row-cols-md-3 g-4">
+                                <div class="col">
+                                    <div class="card h-100 bg-transparent box-shadow">
+                                        <img src="static/images/schedule.png" class="card-img-top w-auto m-auto py-2" height="100px" alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-center">Scheduled Classes</h5>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card h-100 bg-transparent box-shadow">
+                                        <img src="static/images/edit.png" class="card-img-top w-auto m-auto py-2" height="100px" alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-center">Notes Uploaded</h5>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card h-100 bg-transparent box-shadow">
+                                        <img src="static/images/envelope.png" class="card-img-top w-auto m-auto py-2" height="100px" alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-center">Updates</h5>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                     <div style="height:100px; width:100%;">
                     </div>
                 </section>
             </section>
+
 
         </div>
 

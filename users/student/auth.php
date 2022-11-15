@@ -6,5 +6,4 @@ if(!$_SESSION['login'] || !$_SESSION['student']){
     header("Location: /");
     exit();
 }
-
 ?>

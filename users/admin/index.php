@@ -50,17 +50,71 @@ require 'auth.php';
 
             <section class="page-container">
                 <section class="page-content">
-                    <div id="change-dashboard">
+                    <div class="row">
 
-                    
-                        
-
+                        <div class="col-sm-8 px-5 py-5 m-auto">
+                            <div class="row row-cols-1 row-cols-md-3 g-4">
+                                <div class="col">
+                                    <div class="card h-100 bg-transparent box-shadow">
+                                        <img src="static/images/schedule.png" class="card-img-top w-auto m-auto py-2" height="100px" alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-center">Scheduled Classes</h5>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card h-100 bg-transparent box-shadow">
+                                        <img src="static/images/edit.png" class="card-img-top w-auto m-auto py-2" height="100px" alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-center">Notes Uploaded</h5>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card h-100 bg-transparent box-shadow">
+                                        <img src="static/images/envelope.png" class="card-img-top w-auto m-auto py-2" height="100px" alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-center">Updates</h5>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card h-100 bg-transparent box-shadow">
+                                        <img src="static/images/user.png" class="card-img-top w-auto m-auto py-2" height="100px" alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-center">Total Users</h5>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card h-100 bg-transparent box-shadow">
+                                        <img src="static/images/user.png" class="card-img-top w-auto m-auto py-2" height="100px" alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-center">Registered Teachers</h5>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card h-100 bg-transparent box-shadow">
+                                        <img src="static/images/user.png" class="card-img-top w-auto m-auto py-2" height="100px" alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-center">Registered Students</h5>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                     <div style="height:100px; width:100%;">
                     </div>
                 </section>
             </section>
-
         </div>
 
 

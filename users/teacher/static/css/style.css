@@ -337,3 +337,17 @@ select:hover {
     font-weight: bold;
     color: #003569;
 }
+
+#profile_img{
+    /* border: 2px solid red; */
+    width: 50%;
+    margin: auto;
+    border-radius: 40px;
+}
+#profile_img img{
+    -webkit-box-shadow: 0 10px 6px -6px #777;
+       -moz-box-shadow: 0 10px 6px -6px #777;
+            box-shadow: 0 10px 6px -6px #777;
+
+
+}

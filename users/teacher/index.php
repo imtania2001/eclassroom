@@ -48,19 +48,19 @@ require 'auth.php';
             </div>
 
             <section class="page-container">
-                <section class="page-content" style="margin-top: 100px;">
+                <section class="page-content">
                     <div class="row">
-                        <div class="col-sm-3 px-5 ">
+                        <div class="col-sm-4 px-5 ">
                             <div class="row row-cols-1 row-cols-md-1 g-2">
                                 <div class="col">
                                     <div class="card bg-transparent" style=" box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);">
-                                        <img src="static/images/logo.png" class="card-img-top " alt="...">
+                                        <img src="<?php echo $_SESSION['teacher']['photo']; ?>" id="profile_img" class="card-img-top py-3 " alt="...">
                                         <div class="card-body">
-                                            <h5 class="card-title fw-bold"><?php echo $_SESSION['teacher']['firstname']; ?></h5>
+                                            <h5 class="card-title fw-bold"><?php echo $_SESSION['teacher']['firstname']." ".$_SESSION['teacher']['midname']." ".$_SESSION['teacher']['Lastname']; ?></h5>
                                             <p class="card-text m-0 text-center">
-                                            <p class="m-0 p-1">Mobile : 7003622801</p>
-                                            <p class="m-0 p-1">Email : ronit@gmail.com</p>
-                                            <p class="m-0 p-1">D.O.B : 15-11-2022</p>
+                                            <p class="m-0 p-1"><span class="fw-bold">Mobile : </span> <?php echo $_SESSION['teacher']['phone']; ?></p>
+                                            <p class="m-0 p-1"><span class="fw-bold">Email : </span> <?php echo $_SESSION['teacher']['email']; ?></p>
+                                            <p class="m-0 p-1"><span class="fw-bold">D.O.B : </span> <?php echo $_SESSION['teacher']['dob']; ?></p>
                                             <button class="btn btn-success w-100 my-2">Edit Profile</button>
                                             </p>
                                         </div>
@@ -69,7 +69,7 @@ require 'auth.php';
                             </div>
                         </div>
 
-                        <div class="col-sm-9 px-5 py-5">
+                        <div class="col-sm-8 px-5 py-5">
                             <div class="row row-cols-1 row-cols-md-3 g-4">
                                 <div class="col">
                                     <div class="card h-100 bg-transparent box-shadow">
