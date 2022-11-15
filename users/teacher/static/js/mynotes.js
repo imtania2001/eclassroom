@@ -7,7 +7,6 @@ function getFacultyNoteByIdHTML() {
     <thead>
       <th>S.No</th>
       <th>Date</th>
-      <th>Time</th>
       <th>Stream</th>
       <th>Semester</th>
       <th>Section</th>
@@ -17,34 +16,88 @@ function getFacultyNoteByIdHTML() {
       <th>Link</th>
       <th>Delete</th>
     </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>28-10-2022</td>
-        <td>10:00 AM</td>
-        <td>BCA</td>
-        <td>Sem1</td>
-        <td>C Programming</td>
-        <td>Alpha</td>
-        <td>Introduction</td>
-        <td><button class="btn btn-primary"><i class="fa-solid fa-eye"></i></button></td>
-        <td>
-          <a href="https://www.google.com/" target="_blank"><button class="btn btn-warning">
-            <i class="fa-solid fa-link"></i>
-          </button></a>
-        </td>
-        <td>
-          <button class="btn btn-danger" onclick="deleteNote('id');">
-            <i class="fa-solid fa-trash"></i>
-          </button>
-        </td>
-      </tr>
+    <tbody id="fetch_notes">
+      
     </tbody>
-  </table>`;
+  </table>
+  <p id="fetch_notes_message" class="text-center text-muted"></p>`;
   document.getElementById("mynote-container").innerHTML = html;
   document.getElementById("show-table").disabled = true;
   document.getElementById("show-form").disabled = false;
-  
+
+  var form = new FormData();
+  form.append("faculty_id", login_user.id);
+
+  var settings = {
+    "url": "/api/v1/updatednote/viewnotes.php",
+    "method": "POST",
+    "timeout": 0,
+    "processData": false,
+    "contentType": false,
+    "data": form
+  };
+
+  $.ajax(settings).done(function (response) {
+    console.log(response);
+    if (response.status_code == 1200) {
+      let arr = response.data.row;
+      let total = response.data.total;
+      document.getElementById("total_notes").innerHTML = `(${total})`;
+      if (!total) {
+        document.getElementById("fetch_notes_message").innerHTML = `No Data Found`;
+      }
+      tbody = ``;
+      for (let i = 0; i < total; i++) {
+        stream = arr[i].stream;
+        sem = arr[i].sem;
+        if (stream == 1)
+          stream = "BCA";
+        else if (stream == 2)
+          stream = "BBA";
+        else if (stream == 3)
+          stream = "MCA";
+        else if (stream == 4)
+          stream = "MSC";
+
+        if (sem == 1 || sem == 7 || sem == 13 || sem == 17)
+          sem = "SEM1";
+        else if (sem == 2 || sem == 8 || sem == 14 || sem == 18)
+          sem = "SEM2";
+        else if (sem == 3 || sem == 9 || sem == 15 || sem == 19)
+          sem = "SEM3";
+        else if (sem == 4 || sem == 10 || sem == 16 || sem == 20)
+          sem = "SEM4";
+        else if (sem == 5 || sem == 11)
+          sem = "SEM5";
+        else if (sem == 6 || sem == 12)
+          sem = "SEM6";
+        tbody += `
+                          <tr>
+                            <td>${i + 1}</td>
+                            <td>${arr[i].date}</td>
+                            <td>${stream}</td>
+                            <td>${sem}</td>
+                            <td>${arr[i].subject}</td>
+                            <td>${arr[i].section}</td>
+                            <td>${arr[i].topic}</td>
+                            <td><a href="${arr[i].file}" download><button class="btn btn-primary"><i class="fa-solid fa-eye"></i></button></a></td>
+                            <td>
+                              <a href="${arr[i].recordinglink}" target="_blank"><button class="btn btn-warning">
+                                <i class="fa-solid fa-link"></i>
+                              </button></a>
+                            </td>
+                            <td>
+                              <button class="btn btn-danger" onclick="deleteNote('${arr[i].id}');">
+                                <i class="fa-solid fa-trash"></i>
+                              </button>
+                            </td>
+                          </tr>
+                `;
+      }
+      document.getElementById("fetch_notes").innerHTML = tbody;
+    }
+  });
+
 
 }
 

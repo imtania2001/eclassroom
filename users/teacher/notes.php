@@ -1,5 +1,5 @@
 <?php
-    require 'auth.php';
+require 'auth.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,19 +22,19 @@
         <div class="topdesign">
         </div>
         <div class="action">
-        <div class="profile" id="profile" onclick="toggle();">
-                
-                </div>
-                <div class="menu">
-                    <h3 id="login_user_name"><br>
-                        <span>Teacher</span>
-                    </h3>
-                    <ul>
-                        <?php
-                        include "utils/menubar.php";
-                        ?>
-                    </ul>
-                </div>
+            <div class="profile" id="profile" onclick="toggle();">
+
+            </div>
+            <div class="menu">
+                <h3 id="login_user_name"><br>
+                    <span>Teacher</span>
+                </h3>
+                <ul>
+                    <?php
+                    include "utils/menubar.php";
+                    ?>
+                </ul>
+            </div>
 
             <div class="sc-header" style="background:transparent; ">
                 <div class="sc-header-logo">
@@ -50,7 +50,8 @@
             <section class="page-container">
                 <div class="sc-heading">
                     <div class="sc-heading-part">
-                        <button type="button" class="btn btn-success btn-lg btn-block" id="show-table" onclick="getFacultyNoteByIdHTML()">List of Notes (1)</button>
+                        <button type="button" class="btn btn-success btn-lg btn-block" id="show-table" onclick="getFacultyNoteByIdHTML()">List of Notes <span id="total_notes">(0)</span>
+                        </button>
                     </div>
                     <div class="sc-heading-part">
                         <button type="button" class="btn btn-success btn-lg btn-block" id="show-form" onclick="showCreateNoteForm()">New Note</button>

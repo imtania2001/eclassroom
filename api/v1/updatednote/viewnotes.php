@@ -38,5 +38,3 @@ if (isset($_REQUEST['faculty_id'])) {
 }else{
     echo json_encode(array('status' => 'error', 'status_code' => 1400,  'message' => 'PARAMS NOT FOUND'));
 }
-
-?>
