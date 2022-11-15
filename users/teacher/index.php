@@ -75,6 +75,7 @@ require 'auth.php';
                                     <div class="card h-100 bg-transparent box-shadow">
                                         <img src="static/images/schedule.png" class="card-img-top w-auto m-auto py-2" height="100px" alt="...">
                                         <div class="card-body">
+                                            <h1 class="text-center fw-bold blockquote fs-1" id="total_class">(0)</h1>
                                             <h5 class="card-title text-center">Scheduled Classes</h5>
                                             
                                         </div>
@@ -84,6 +85,7 @@ require 'auth.php';
                                     <div class="card h-100 bg-transparent box-shadow">
                                         <img src="static/images/edit.png" class="card-img-top w-auto m-auto py-2" height="100px" alt="...">
                                         <div class="card-body">
+                                        <h1 class="text-center fw-bold blockquote fs-1" id="total_notes">(0)</h1>
                                             <h5 class="card-title text-center">Notes Uploaded</h5>
                                                                                     </div>
                                     </div>
@@ -92,6 +94,7 @@ require 'auth.php';
                                     <div class="card h-100 bg-transparent box-shadow">
                                         <img src="static/images/envelope.png" class="card-img-top w-auto m-auto py-2" height="100px" alt="...">
                                         <div class="card-body">
+                                        <h1 class="text-center fw-bold blockquote fs-1" id="total_updates">(0)</h1>
                                             <h5 class="card-title text-center">Updates</h5>
                                             
                                         </div>
@@ -113,6 +116,7 @@ require 'auth.php';
     </div>
 
     <script src="static/js/admin.js"></script>
+    <script src="static/js/index.js"></script>
 </body>
 
 </html>

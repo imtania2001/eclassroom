@@ -1,6 +1,6 @@
 $(document).ready(function () {
-  let stream="bca";
-  let semester="sem5";
+  let stream = login_user.stream;
+  let semester = login_user.semester;
   var form = new FormData();
   form.append("stream", stream);
   form.append("semester", semester);
@@ -24,6 +24,17 @@ $(document).ready(function () {
       if(total){
         // If Data Found
         for(let i=0;i<total;i++){
+          let filepath = arr[i].file;
+          let td = ``;
+          if(filepath!=""){
+            td = `<a href="/api/updates/${arr[i].file}" target="_blank"><button class="btn btn-warning">
+            <i class="fa-solid fa-link"></i>
+          </button></a>`;
+          }else{
+            td = `<button class="btn btn-warning" disabled>
+            <i class="fa-solid fa-link"></i>
+          </button>`;
+          }
           tbody += `
           <tr>
           <td>${i+1}</td>
@@ -33,9 +44,7 @@ $(document).ready(function () {
           <td>${arr[i].message}</td>
           
           <td>
-            <a href="/api/updates/${arr[i].file}" target="_blank"><button class="btn btn-warning">
-              <i class="fa-solid fa-link"></i>
-            </button></a>
+          ${td}
           </td>
         </tr>
             `;
