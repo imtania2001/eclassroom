@@ -1,12 +1,13 @@
 $(document).ready(async function () {
-    let stream = "bca";
-    let sem = "sem5";
-    let section = "alpha";
-    var form = new FormData();
-    form.append("stream", stream);
-    form.append("sem", sem);
-    form.append("section", section);
-    
+  let stream = login_user.stream;
+  let sem = login_user.semester;
+  let section = login_user.section;
+
+  var form = new FormData();
+  form.append("stream", stream);
+  form.append("sem", sem);
+  form.append("section", section);
+
     var settings = {
       "url": "/api/v1/updatednote/viewallnotes.php?",
       "method": "POST",
@@ -27,18 +28,40 @@ $(document).ready(async function () {
         }
         let tbody = ``;
         for(let i=0;i<arr.length;i++){
+          stream = arr[i].stream;
+          sem = arr[i].sem;
+          if(stream == "BCA"){
+            if(sem == 1){
+              sem = "SEM1";
+            }
+            else if(sem == 2){
+              sem = "SEM2";
+            }
+            else if(sem == 3){
+              sem = "SEM3";
+            }
+            else if(sem == 4){
+              sem = "SEM4";
+            }
+            else if(sem == 5){
+              sem = "SEM5";
+            }
+            else if(sem == 3){
+              sem = "SEM3";
+            }
+          }
             tbody += `<tr>
-                            <td>${i+1}</td>
-                            <td>${arr[i].date}</td>
-                            <td>${arr[i].stream}</td>
-                            <td>${arr[i].sem}</td>
-                            <td>${arr[i].section}</td>
-                            <td>${arr[i].subject}</td>
-                            <td>${arr[i].topic}</td>
-                            <td><a href="${arr[i].file}" download><button type="view" class="btn btn-primary">view</button></a></td>
-                         
-                        </tr>
-            `;
+            <td>${i + 1}</td>
+            <td>${arr[i].date}</td>
+            <td>${stream}</td>
+            <td>${sem}</td>
+            <td>${arr[i].section}</td>
+            <td>${arr[i].subject}</td>
+            <td>${arr[i].topic}</td>
+            <td><a href="${arr[i].classlink}" download><button type="Link" class="btn btn-primary">Link</button></a></td>
+         
+        </tr>
+`;
         }
         document.getElementById("fetch-notes").innerHTML = tbody;
         document.getElementById("total-note").innerHTML = total;

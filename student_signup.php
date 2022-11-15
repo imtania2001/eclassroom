@@ -34,19 +34,10 @@ if ($_SESSION['user_role'] != "student") {
                 <option value="female">Female</option>
                 <option value="others">Others</option>
             </select>
-            <select id="stream">
-                <option value="BCA">BCA</option>
-                <option value="BBA">BBA</option>
-                <option value="MCA">MCA</option>
-                <option value="MSC">Msc.</option>
+            <select id="stream" onchange="fetchSemester();">
+                <option value="" selected disabled>Select Stream</option>
             </select>
-            <select id="semester">
-                <option value="SEM1">Semester 1</option>
-                <option value="SEM2">Semester 2</option>
-                <option value="SEM3">Semester 3</option>
-                <option value="SEM4">Semester 4</option>
-                <option value="SEM5">Semester 5</option>
-                <option value="SEM6">Semester 6</option>
+            <select id="semester"><option value="" selected disabled>Select Semester</option>
             </select>
             <select id="section">
             <option value="alpha">ALPHA</option>
@@ -67,6 +58,7 @@ if ($_SESSION['user_role'] != "student") {
     </div>
 
     <script src="static/js/index.js"></script>
+    <script src="static/js/student_signup.js"></script>
     <script>
         let user_role = sessionStorage.getItem('user_role');
         if(user_role!="student"){

@@ -79,6 +79,8 @@ $("#signup_form").submit(async function (e) {
             }else{
                 alert("Some Error Occured");
             }
+        }else{
+            alert(response.data.message);
         }
     }else{
         // Error
@@ -139,8 +141,6 @@ async function teacherRegistration() {
     });
 
 }
-
-
 
 // Student Registration API Integration
 async function studentRegistration() {
