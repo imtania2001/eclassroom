@@ -81,7 +81,7 @@ function getFacultyClassesByIdHTML() {
                             <td>${stream}</td>
                             <td>${sem}</td>
                             <td>${arr[i].section}</td>
-                            <td>${arr[i].subject}</td>
+                            <td>${arr[i].subject_name}</td>
                             <td>${arr[i].topic}</td>
                             <td>
                             <a href="${arr[i].classlink}" target="_blank"><button class="btn btn-warning">
@@ -131,7 +131,6 @@ function showCreateClassForm() {
                                         <option value="" selected disabled>Choose Section</option>
                                         <option value="Alpha">Alpha</option>
                                         <option value="Beta">Beta</option>
-                                        <option value="Combined">Combined</option>
                                     </select>
                                 </div>
                             </div>
@@ -396,9 +395,9 @@ async function deleteClass(id) {
         console.log(response);
         if (response.status_code == 1200) {
             alert("Class Deleted");
+            window.location.reload();
         } else {
             alert("An Error Occured");
-            window.location.reload();
         }
     });
 

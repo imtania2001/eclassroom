@@ -9,7 +9,11 @@ class Notes
         if (!$conn)
             return false;
 
-        $sql = "INSERT INTO `upload_notes`(`faculty_id`, `faculty_name`, `stream`, `sem`, `section`, `subject`, `topic`, `date`, `file`, `recordinglink`) VALUES ('$faculty_id', '$faculty_name', '$stream', '$sem', '$section', '$subject', '$topic', '$date', '$file', '$recordinglink')";
+        $sql = "SELECT * FROM `subjects` WHERE `id`='$subject'";
+        $result = $conn->query($sql);
+        $row = $result->fetch_assoc();
+        $subject_name = $row['subject'];
+        $sql = "INSERT INTO `upload_notes`(`faculty_id`, `faculty_name`, `stream`, `sem`, `section`, `subject`, `subject_name`, `topic`, `date`, `file`, `recordinglink`) VALUES ('$faculty_id', '$faculty_name', '$stream', '$sem', '$section', '$subject', '$subject_name', '$topic', '$date', '$file', '$recordinglink')";
         $result = $conn->query($sql);
         if ($result)
             return true;

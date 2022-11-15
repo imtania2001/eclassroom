@@ -77,8 +77,8 @@ function getFacultyNoteByIdHTML() {
                             <td>${arr[i].date}</td>
                             <td>${stream}</td>
                             <td>${sem}</td>
-                            <td>${arr[i].subject}</td>
                             <td>${arr[i].section}</td>
+                            <td>${arr[i].subject_name}</td>
                             <td>${arr[i].topic}</td>
                             <td><a href="${arr[i].file}" download><button class="btn btn-primary"><i class="fa-solid fa-eye"></i></button></a></td>
                             <td>

@@ -9,8 +9,12 @@ class Schedule
         if (!$conn)
             return false;
 
+        $sql = "SELECT * FROM `subjects` WHERE `id`='$subject'";
+        $result = $conn->query($sql);
+        $row = $result->fetch_assoc();
+        $subject_name = $row['subject'];
         // $sql = "INSERT INTO `schedule_class`(`faculty_id`, `faculty_name`, `stream`, `sem`, `section`, `subject`, `topic`, `date`, `time`) VALUES ('$faculty_id','$faculty_name','$stream', '$sem', '$section', '$subject', '$topic', '$date', '$time')";
-        $sql = "INSERT INTO `schedule_class` (`id`, `faculty_id`, `faculty_name`, `stream`, `sem`, `section`, `subject`, `topic`, `date`, `time`, `classlink`) VALUES (NULL, '$faculty_id','$faculty_name','$stream', '$sem', '$section', '$subject', '$topic', '$date', '$time', '$classlink');";
+        $sql = "INSERT INTO `schedule_class` (`id`, `faculty_id`, `faculty_name`, `stream`, `sem`, `section`, `subject`, `subject_name`, `topic`, `date`, `time`, `classlink`) VALUES (NULL, '$faculty_id','$faculty_name','$stream', '$sem', '$section', '$subject', '$subject_name', '$topic', '$date', '$time', '$classlink');";
         $result = $conn->query($sql);
         if ($result)
             return true;
