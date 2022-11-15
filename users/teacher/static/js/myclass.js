@@ -18,37 +18,90 @@ function getFacultyClassesByIdHTML() {
       <th>Edit</th>
       <th>Delete</th>
     </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>28-10-2022</td>
-        <td>10:00 AM</td>
-        <td>BCA</td>
-        <td>Sem1</td>
-        <td>C Programming</td>
-        <td>Alpha</td>
-        <td>Introduction</td>
-        <td>
-          <a href="https://www.google.com/" target="_blank"><button class="btn btn-warning">
-            <i class="fa-solid fa-link"></i>
-          </button></a>
-        </td>
-        <td>
-          <button class="btn btn-secondary" onclick="showEditClassForm();">
-            <i class="fa-sharp fa-solid fa-pen-to-square"></i>
-          </button>
-        </td>
-        <td>
-          <button class="btn btn-danger" onclick="deleteClass('id');">
-            <i class="fa-solid fa-trash"></i>
-          </button>
-        </td>
-      </tr>
+    <tbody id="fetch_class">
+
     </tbody>
   </table>`;
     document.getElementById("myclass-container").innerHTML = html;
     document.getElementById("show-table").disabled = true;
     document.getElementById("show-form").disabled = false;
+
+
+
+    var form = new FormData();
+    form.append("id", login_user.id);
+
+    var settings = {
+        "url": "/api/v1/scheduleclass/view.php",
+        "method": "POST",
+        "timeout": 0,
+        "processData": false,
+        "contentType": false,
+        "data": form
+    };
+
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+        if (response.status_code == 1200) {
+            let arr = response.data.row;
+            let total = response.data.total;
+            tbody = ``;
+            for (let i = 0; i < total; i++) {
+                stream = arr[i].stream;
+                sem = arr[i].sem;
+                if (stream == 1)
+                    stream = "BCA";
+                else if (stream == 2)
+                    stream = "BBA";
+                else if (stream == 3)
+                    stream = "MCA";
+                else if (stream == 4)
+                    stream = "MSC";
+
+                if (sem == 1 || sem == 7 || sem == 13 || sem == 17)
+                    sem = "SEM1";
+                else if (sem == 2 || sem == 8 || sem == 14 || sem == 18)
+                    sem = "SEM2";
+                else if (sem == 3 || sem == 9 || sem == 15 || sem == 19)
+                    sem = "SEM3";
+                else if (sem == 4 || sem == 10 || sem == 16 || sem == 20)
+                    sem = "SEM4";
+                else if (sem == 5 || sem == 11)
+                    sem = "SEM5";
+                else if (sem == 6 || sem == 12)
+                    sem = "SEM6";
+                tbody += `
+                          <tr>
+                            <td>${i + 1}</td>
+                            <td>${arr[i].date}</td>
+                            <td>${arr[i].time}</td>
+                            <td>${stream}</td>
+                            <td>${sem}</td>
+                            <td>${arr[i].section}</td>
+                            <td>${arr[i].subject}</td>
+                            <td>${arr[i].topic}</td>
+                            <td>
+                            <a href="${arr[i].classlink}" target="_blank"><button class="btn btn-warning">
+                                <i class="fa-solid fa-link"></i>
+                            </button></a>
+                            </td>
+                            <td>
+                            <button class="btn btn-secondary" onclick="showEditClassForm('${arr[i].id}');">
+                                <i class="fa-sharp fa-solid fa-pen-to-square"></i>
+                            </button>
+                            </td>
+                            <td>
+                            <button class="btn btn-danger" onclick="deleteClass('${arr[i].id}');">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                            </td>
+                        </tr>
+                `;
+            }
+            document.getElementById("fetch_class").innerHTML = tbody;
+        }
+    });
+
 }
 
 function showCreateClassForm() {
@@ -328,26 +381,26 @@ function fetchSubject() {
 // Create Class API Integration
 
 async function createClassAPI() {
-    alert("Here");
+    // alert("Here");
     let stream = document.getElementById("stream").value;
     let semester = document.getElementById("semester").value;
-    let subject=document.getElementById("subject").value;
-    let topic=document.getElementById("topic").value;
-    let date=document.getElementById("date").value;
-    let time=document.getElementById("time").value;
-    let classlink=document.getElementById("classlink").value;
-    let section=document.getElementById("section").value;
+    let subject = document.getElementById("subject").value;
+    let topic = document.getElementById("topic").value;
+    let date = document.getElementById("date").value;
+    let time = document.getElementById("time").value;
+    let classlink = document.getElementById("classlink").value;
+    let section = document.getElementById("section").value;
     var form = new FormData();
     form.append("faculty_id", login_user.id);
-    form.append("faculty_name", login_user.firstname+" "+login_user.midname+" "+login_user.Lastname);
+    form.append("faculty_name", login_user.firstname + " " + login_user.midname + " " + login_user.Lastname);
     form.append("stream", stream);
     form.append("sem", semester);
     form.append("subject", subject);
-    form.append("topic",topic);
+    form.append("topic", topic);
     form.append("date", date);
     form.append("time", time);
     form.append("classlink", classlink);
-    form.append("section",section );
+    form.append("section", section);
 
     var settings = {
         "url": "/api/v1/scheduleclass/create.php",
@@ -359,13 +412,13 @@ async function createClassAPI() {
     };
     $.ajax(settings).done(function (response) {
         console.log(response);
-        if(response.status_code == 1200){
+        if (response.status_code == 1200) {
             alert(response.message);
-            getFacultyClassesByIdHTML(); 
-        }else{
+            getFacultyClassesByIdHTML();
+        } else {
             alert(response.message);
             showCreateClassForm();
         }
-      });
+    });
 }
 //

@@ -17,10 +17,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
         header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
 }
 header('Content-type: application/json');
-if (isset($_REQUEST['faculty_id'])) {
+if (isset($_REQUEST['id'])) {
     require "../../controllers/Schedule.php";
 
-    $result = Schedule::view($_REQUEST['faculty_id']);
+    $result = Schedule::view($_REQUEST['id']);
 
     
     if($result){
@@ -38,5 +38,3 @@ if (isset($_REQUEST['faculty_id'])) {
 }else{
     echo json_encode(array('status' => 'error', 'status_code' => 1400,  'message' => 'PARAMS NOT FOUND'));
 }
-
-?>

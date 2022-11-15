@@ -15,7 +15,7 @@ if(!login_user){
     window.location.replace("/");
 }else{
     console.log(login_user);
-    console.log(login_user.id);
+    // console.log(login_user.id);
 
     document.getElementById("profile").innerHTML = `<img src="${login_user.photo}" alt="">`;
     document.getElementById("login_user_name").innerHTML = `${login_user.firstname} ${login_user.midname
