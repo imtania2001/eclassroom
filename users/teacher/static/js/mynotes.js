@@ -206,12 +206,13 @@ async function deleteNote(id) {
   if (!val) {
     return false;
   }
+  alert(id);
 
   var form = new FormData();
   form.append("id", id);
 
   var settings = {
-    "url": "/api/v1/scheduleclass/delete.php",
+    "url": "/api/v1/updatednote/delete.php",
     "method": "POST",
     "timeout": 0,
     "processData": false,
@@ -222,10 +223,10 @@ async function deleteNote(id) {
   $.ajax(settings).done(function (response) {
     console.log(response);
     if (response.status_code == 1200) {
-      alert("Class Deleted");
+      alert("Notes Deleted");
+      window.location.reload();
     } else {
       alert("An Error Occured");
-      window.location.reload();
     }
   });
 

@@ -20,22 +20,17 @@ header('Content-type: application/json');
 if (isset($_REQUEST['id'])) {
     require "../../controllers/Notes.php";
     $result = Notes::delete($_REQUEST['id']);
-
-    
-    if($result){
+    if ($result) {
         echo json_encode(
             array(
-                "status" => "success", 
-                "status_code" => "1200" , 
-                "message" => "Class Scheduled"
+                "status" => "success",
+                "status_code" => 1200,
+                "message" => "Notes Deleted"
             )
         );
-    }else{
+    } else {
         echo json_encode(array('status' => 'success', 'status_code' => 1300, "message" => "Error Occured"));
     }
-    
-}else{
+} else {
     echo json_encode(array('status' => 'error', 'status_code' => 1400,  'message' => 'PARAMS NOT FOUND'));
 }
-
-?>

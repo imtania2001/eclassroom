@@ -56,7 +56,7 @@ class Notes
         } else
             return false;
     }
-    
+
     //Delete class
 
     public static function delete($id)
