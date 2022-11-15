@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
         header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
 }
 header('Content-type: application/json');
-if (isset($_REQUEST['stream'])&& isset($_REQUEST['semester']) && isset($_REQUEST['title'])&& isset($_REQUEST['message'])&&isset($_FILES['file'])&&isset($_REQUEST['date'])&&isset($_REQUEST['time'])) {
+if (isset($_REQUEST['stream'])&& isset($_REQUEST['semester']) && isset($_REQUEST['title'])&& isset($_REQUEST['message'])) {
     require "../../controllers/Update.php";
 
         // $filepath = '';
@@ -33,7 +33,16 @@ if (isset($_REQUEST['stream'])&& isset($_REQUEST['semester']) && isset($_REQUEST
         //     $filepath = $filepath . $address . ','; // address of all files separated by (,) comma
         // }
 
-    $result = Update::create($_REQUEST['stream'],$_REQUEST['semester'], $_REQUEST['title'],$_REQUEST['message'],$_FILES['file'],$_REQUEST['date'],$_REQUEST['time']);
+        $filepath = "";
+        if(isset($_FILES['file'])){
+            $url = "../../docs/";  
+            $var = $_FILES['file']['name'];
+            $furl = $url . $var;
+            move_uploaded_file($_FILES['file']['tmp_name'], $furl);  
+            $path = "/api/docs/";  
+            $filepath = $path.$var; 
+        }
+        $result = Update::create($_REQUEST['stream'],$_REQUEST['semester'], $_REQUEST['title'],$_REQUEST['message'],$filepath);
     
     if($result){
         echo json_encode(

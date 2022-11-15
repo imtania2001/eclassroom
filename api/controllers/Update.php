@@ -2,13 +2,15 @@
 require("Mysql.php");
 class Update
 {
-    public static function create( $stream, $semester,$title,$message, $file, $date, $time)
+    public static function create( $stream, $semester,$title,$message,$file)
     {
         $config = Mysql::config();
         $conn = new mysqli($config[0], $config[1], $config[2], $config[3]);
         if (!$conn)
             return false;
 
+        $date = date("Y-m-d");
+        $time = date("H:i:s");
         $sql = "INSERT INTO `updates`(  `stream`, `semester`,`title`,`message`,`file`, `date`, `time`) VALUES ('$stream', '$semester',  '$title', '$message', '$file', '$date', '$time')";
         $result = $conn->query($sql);
         if ($result)

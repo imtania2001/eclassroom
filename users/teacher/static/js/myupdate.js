@@ -11,6 +11,7 @@ function getAllUpdateHTML() {
       <th>Time</th>
       <th>Stream</th>
       <th>Semester</th>
+      <th>Topic</th>
       <th>Message</th>
       <th>Link</th>
       <th>Delete</th>
@@ -42,21 +43,56 @@ function getAllUpdateHTML() {
       if(total){
         // If Data Found
         for(let i=0;i<total;i++){
+          let filepath = arr[i].file;
+          let td = ``;
+          if(filepath!=""){
+            td = `<a href="/api/updates/${arr[i].file}" target="_blank"><button class="btn btn-warning">
+            <i class="fa-solid fa-link"></i>
+          </button></a>`;
+          }else{
+            td = `<button class="btn btn-warning" disabled>
+            <i class="fa-solid fa-link"></i>
+          </button>`;
+          }
+
+          stream = arr[i].stream;
+        sem = arr[i].semester;
+        if (stream == 1)
+          stream = "BCA";
+        else if (stream == 2)
+          stream = "BBA";
+        else if (stream == 3)
+          stream = "MCA";
+        else if (stream == 4)
+          stream = "MSC";
+
+        if (sem == 1 || sem == 7 || sem == 13 || sem == 17)
+          sem = "SEM1";
+        else if (sem == 2 || sem == 8 || sem == 14 || sem == 18)
+          sem = "SEM2";
+        else if (sem == 3 || sem == 9 || sem == 15 || sem == 19)
+          sem = "SEM3";
+        else if (sem == 4 || sem == 10 || sem == 16 || sem == 20)
+          sem = "SEM4";
+        else if (sem == 5 || sem == 11)
+          sem = "SEM5";
+        else if (sem == 6 || sem == 12)
+          sem = "SEM6";
+
           tbody += `
           <tr>
           <td>${i+1}</td>
           <td>${arr[i].date}</td>
           <td>${arr[i].time}</td>
-          <td>${arr[i].stream}</td>
-          <td>${arr[i].semester}</td>
+          <td>${stream}</td>
+          <td>${sem}</td>
           <td>${arr[i].title}</td>
+          <td>${arr[i].message}</td>
           <td>
-            <a href="/api/updates/${arr[i].file}" target="_blank"><button class="btn btn-warning">
-              <i class="fa-solid fa-link"></i>
-            </button></a>
+          ${td}
           </td>
           <td>
-            <button class="btn btn-danger" onclick="deleteUpdate('id');">
+            <button class="btn btn-danger" onclick="deleteUpdate('${arr[i].id}');">
               <i class="fa-solid fa-trash"></i>
             </button>
           </td>
@@ -93,12 +129,8 @@ function showCreateUpdateForm() {
                             <div class="form-group col-sm-6 my-2">
                                 <label class="text-dark px-2">Select Stream</label>
                                 <div class="col-sm-9">
-                                    <select id="stream" class="form-control">
+                                    <select id="stream" onchange="fetchSemester();" class="form-control">
                                         <option value="" selected disabled>Choose Stream</option>
-                                        <option value="BCA">BCA</option>
-                                        <option value="BBA">BBA</option>
-                                        <option value="MCA">MCA</option>
-                                        <option value="MSC">MSC</option>
                                     </select>
                                 </div>
                             </div>
@@ -107,63 +139,33 @@ function showCreateUpdateForm() {
                                 <div class="col-sm-9">
                                     <select id="semester" class="form-control">
                                         <option value="" selected disabled>Choose Semester</option>
-                                        <option value="Semester 1">Semester 1</option>
-                                        <option value="Semester 2">Semester 2</option>
-                                        <option value="Semester 3">Semester 3</option>
-                                        <option value="Semester 4">Semester 4</option>
-                                        <option value="Semester 5">Semester 5</option>
-                                        <option value="Semester 6">Semester 6</option>
                                     </select>
                                 </div>
                             </div>
+                            
+                            
+                          
                             <div class="form-group col-sm-6 my-2">
-                                <label class="text-dark px-2">Select Section</label>
+                                <label class="text-dark px-2">Title</label>
                                 <div class="col-sm-9">
-                                    <select id="section" class="form-control">
-                                        <option value="" selected disabled>Choose Section</option>
-                                        <option value="Alpha">Alpha</option>
-                                        <option value="Beta">Beta</option>
-                                        <option value="Combined">Combined</option>
-                                    </select>
+                                    <input type="text" id="title" class="form-control bg-light" placeholder="Title">
                                 </div>
                             </div>
                             <div class="form-group col-sm-6 my-2">
-                                <label class="text-dark px-2">Select Subject</label>
+                                <label class="text-dark px-2">Message</label>
                                 <div class="col-sm-9">
-                                    <select id="subject" class="form-control">
-                                        <option value="" selected disabled>Choose Subject</option>
-                                        <option value="C Language">C Language</option>
-                                        <option value="C++ Language">C++ Language</option>
-                                    </select>
+                                    <input type="text" id="message" class="form-control bg-light" placeholder="Enter The Message">
                                 </div>
                             </div>
                             <div class="form-group col-sm-6 my-2">
-                                <label class="text-dark px-2">Select Date</label>
+                                <label class="text-dark px-2">File</label>
                                 <div class="col-sm-9">
-                                    <input type="date" id="date" class="form-control bg-light" placeholder="Select Date">
-                                </div>
-                            </div>
-                            <div class="form-group col-sm-6 my-2">
-                                <label class="text-dark px-2">Select Time</label>
-                                <div class="col-sm-9">
-                                    <input type="time" id="time" class="form-control bg-light" placeholder="Select Time">
-                                </div>
-                            </div>
-                            <div class="form-group col-sm-6 my-2">
-                                <label class="text-dark px-2">Enter the topic</label>
-                                <div class="col-sm-9">
-                                    <input type="text" id="topic" class="form-control bg-light" placeholder="Enter the topic">
-                                </div>
-                            </div>
-                            <div class="form-group col-sm-6 my-2">
-                                <label class="text-dark px-2">Enter class link</label>
-                                <div class="col-sm-9">
-                                    <input type="text" id="classlink" class="form-control bg-light" placeholder="Enter class link">
+                                    <input type="file" id="file" class="form-control bg-light" >
                                 </div>
                             </div>
                             <div class="form-group d-flex justify-content-center align-items-center flex-wrap">
-                                <button class="btn btn-success mx-3 mt-2" id="createUpdateBtn" type="button">Submit</button>
-                                <button class="btn btn-danger mx-3 mt-2" id="cancelCreateUpdate" onclick="showCreateUpdateForm();">Cancel</button>
+                                <button class="btn btn-success mx-3 mt-2" onclick="createUpdateAPI();" type="button">Submit</button>
+                                <button class="btn btn-danger mx-3 mt-2" id="cancelCreateUpdate" onclick="window.location.reload();">Cancel</button>
                             </div>
                             <div style="height:200px; width:100%;">
                             </div>
@@ -174,89 +176,77 @@ function showCreateUpdateForm() {
   document.getElementById("show-table").disabled = false;
   document.getElementById("show-form").disabled = true;
   // Call the API function for getting stream
-  function fetchSemester() {
-    let stream_id = document.getElementById("stream").value;
-    var form = new FormData();
-    form.append("stream_id", stream_id);
-    form.append("stream_id", stream_id);
-    var settings = {
-        "url": "/api/v1/data/getSemesterByStreamId.php",
-        "method": "POST",
-        "timeout": 0,
-        "processData": false,
-        "contentType": false,
-        "data": form
-    };
-
-    document.getElementById("semester").innerHTML = `<option value="" selected disabled>Loading...!!!</option>`;
-
-    $.ajax(settings).done(function (response) {
-        console.log(response);
-        if (response.status_code == "1200") {
-            let total_record = response.data.total;
-            let arr = response.data.semesters;
-            let content = `<option value="" selected disabled>Select Semester</option>`;
-            for (let i = 0; i < total_record; i++) {
-                content += `<option value="${arr[i].id}">${arr[i].sem}</option>`;
-            }
-            document.getElementById("semester").innerHTML = content;
-        } else {
-            console.log(response["message"]);
-        }
-    });
+  document.getElementById("stream").innerHTML = `<option value="" disabled>Loading...!!!</option>`;
+  $.ajax({
+    "url": "/api/v1/data/getAllStream.php",
+    "method": "POST",
+    "timeout": 0,
+  }).done(function (response) {
+    console.log(response);
+    if (response["status_code"] == 1200) {
+      // console.log(response["data"]);
+      let total_record = response["data"].total;
+      let arr = response["data"].streams;
+      let content = `<option value="" selected disabled>Select Stream</option>`;
+      for (let i = 0; i < total_record; i++) {
+        content += `<option value="${arr[i].id}">${arr[i].stream}</option>`;
+      }
+      document.getElementById("stream").innerHTML = content;
+    } else {
+      console.log(["message"]);
+    }
+  });
 }
 
-}
 // Call the API function for getting Semester
-function fetchSubject() {
-  let semesters_id = document.getElementById("semester").value;
+async function fetchSemester(stream_id = 0) {
+  if (stream_id == 0)
+    stream_id = document.getElementById("stream").value;
   var form = new FormData();
-  form.append("semesters_id", semesters_id);
+  form.append("stream_id", stream_id);
   var settings = {
-      "url": "/api/v1/data/getSubjectBySemesterId.php",
-      "method": "POST",
-      "timeout": 0,
-      "processData": false,
-      "contentType": false,
-      "data": form
+    "url": "/api/v1/data/getSemesterByStreamId.php",
+    "method": "POST",
+    "timeout": 0,
+    "processData": false,
+    "contentType": false,
+    "data": form
   };
 
-  document.getElementById("subject").innerHTML = `<option value="" selected disabled>Loading...!!!</option>`;
+  document.getElementById("semester").innerHTML = `<option value="" selected disabled>Loading...!!!</option>`;
 
   $.ajax(settings).done(function (response) {
-      console.log(response);
-      if (response.status_code == "1200") {
-          let total_record = response.data.total;
-          let arr = response.data.subjects;
-          let content = `<option value="" selected disabled>Select Subject</option>`;
-          for (let i = 0; i < total_record; i++) {
-              content += `<option value="${arr[i].id}">${arr[i].subject}</option>`;
-          }
-          document.getElementById("subject").innerHTML = content;
-      } else {
-          console.log(response["message"]);
+    console.log(response);
+    if (response.status_code == "1200") {
+      let total_record = response.data.total;
+      let arr = response.data.semesters;
+      let content = `<option value="" selected disabled>Select Semester</option>`;
+      for (let i = 0; i < total_record; i++) {
+        content += `<option value="${arr[i].id}">${arr[i].sem}</option>`;
       }
+      document.getElementById("semester").innerHTML = content;
+    } else {
+      console.log(response["message"]);
+    }
   });
 }
 
 // Create a function to create/insert the Updates (API Integration)
 async function createUpdateAPI() {
-  alert("Here");
+  // alert("Here");
   let stream = document.getElementById("stream").value;
   let semester = document.getElementById("semester").value;
   let title=document.getElementById("title").value;
-  let message=document.getElementById("mesage").value;
-  let file=document.getElementById("file").value;
-  let date=document.getElementById("date").value;
-  let time=document.getElementById("time").value;
+  let message=document.getElementById("message").value;
+  let fileInput=document.getElementById("file");
   var form = new FormData();
-  form.append("stream", "bca");
-  form.append("semester", "sem5");
-  form.append("title", "absulate program  updated");
-  form.append("message", "program updated");
-  form.append("file", fileInput.files[0], "/C:/Users/Ditipriya Sen/OneDrive/Documents/absulate.c");
-  form.append("date", "11/11/2022");
-  form.append("time", "3.00pm");
+  form.append("stream", stream);
+  form.append("semester", semester);
+  form.append("title", title);
+  form.append("message", message);
+  if(fileInput.files.length){
+    form.append("file", fileInput.files[0]);
+  }
   
   var settings = {
     "url": "/api/v1/update/create.php",
@@ -269,6 +259,11 @@ async function createUpdateAPI() {
   
   $.ajax(settings).done(function (response) {
     console.log(response);
+    if(response.status_code==1200){
+      alert("Update Sent");
+    }else{
+      alert("Error Occured");
+    }
   });
   }
   
@@ -278,10 +273,12 @@ async function createUpdateAPI() {
 // Function to Delete Update 
 function deleteUpdate(id = "") {
   let val = confirm("Are you sure, You want to delete the update?");
-  if (val) {
+  if (!val) {
+    return false;}
+    //  alert (id);
       // Integrate the API HERE or Call the Function  for Deleting
       var form = new FormData();
-form.append("id", "2");
+form.append("id", id);
 
 var settings = {
   "url": "/api/v1/update/delete.php",
@@ -294,6 +291,18 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
   console.log(response);
-});
+  if (response.status_code == 1200) {
+    alert("Update Deleted");
+    window.location.reload();
+  } else {
+    alert("An Error Occured");
   }
-}
+});
+
+  }
+
+
+
+
+
+
