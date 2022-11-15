@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 14, 2022 at 07:53 PM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 8.1.10
+-- Generation Time: Nov 15, 2022 at 11:50 AM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -80,6 +80,7 @@ CREATE TABLE `schedule_class` (
   `sem` varchar(10) NOT NULL,
   `section` varchar(10) NOT NULL,
   `subject` varchar(50) NOT NULL,
+  `subject_name` varchar(255) DEFAULT NULL,
   `topic` varchar(250) NOT NULL,
   `date` varchar(10) NOT NULL,
   `time` varchar(255) NOT NULL,
@@ -90,15 +91,8 @@ CREATE TABLE `schedule_class` (
 -- Dumping data for table `schedule_class`
 --
 
-INSERT INTO `schedule_class` (`id`, `faculty_id`, `faculty_name`, `stream`, `sem`, `section`, `subject`, `topic`, `date`, `time`, `classlink`) VALUES
-(1, 'Subrate Saha', 'BCA', 'SEM1', 'Alpha', 'C Programm', 'Introduction to Programming', '21-10-2022', '10:00', '00:00:00', ''),
-(2, 'Subrate Saha', 'BCA', 'SEM1', 'Alpha', 'C Programm', 'Introduction to Programming', '21-10-2022', '10:00', '00:00:00', NULL),
-(3, 'Subrate Saha', 'BCA', 'SEM1', 'Alpha', 'C Programm', 'Introduction to Programming', '21-10-2022', '10:00', '  ', NULL),
-(5, 'Subrate Saha', 'BCA', 'SEM1', 'Alpha', 'C Programm', 'Introduction to Programming', '21-10-2022', '10:00', '  ', ''),
-(6, '1', 'Subrate Saha', 'BCA', 'SEM1', 'Alpha', 'C Programming', 'Introduction to Programming', '21-10-2022', '10:00', '  '),
-(7, '2', 'subhendu Saha', 'bca', 'sem5', 'alpha', 'networking', 'encoding technique', '21-10-2022', '10.00', ''),
-(8, '2', 'subhendu Saha', 'bca', 'sem5', 'alpha', 'networking', 'encoding technique', '21-10-2022', '10.00', ''),
-(9, '1', 'subrata saha', '1', '2', '', '7', '', '', '', '');
+INSERT INTO `schedule_class` (`id`, `faculty_id`, `faculty_name`, `stream`, `sem`, `section`, `subject`, `subject_name`, `topic`, `date`, `time`, `classlink`) VALUES
+(5, '2', 'Tania  Ghosh', '4', '17', 'Alpha', '106', 'MICS-101 Discrete Mathematics', 'Normal File', '2022-12-31', '23:59', '');
 
 -- --------------------------------------------------------
 
@@ -427,6 +421,7 @@ CREATE TABLE `upload_notes` (
   `sem` varchar(10) NOT NULL,
   `section` varchar(10) NOT NULL,
   `subject` varchar(250) NOT NULL,
+  `subject_name` varchar(255) DEFAULT NULL,
   `topic` varchar(250) NOT NULL,
   `date` varchar(10) NOT NULL,
   `file` varchar(250) NOT NULL,
@@ -437,10 +432,8 @@ CREATE TABLE `upload_notes` (
 -- Dumping data for table `upload_notes`
 --
 
-INSERT INTO `upload_notes` (`id`, `faculty_id`, `faculty_name`, `stream`, `sem`, `section`, `subject`, `topic`, `date`, `file`, `recordinglink`) VALUES
-(1, '2', 'subhendu Saha', 'bca', 'sem5', 'alpha', 'networking', 'encoding technique', '21-10-2022', '/api/notes/10_even _no.c', ''),
-(2, '2', 'subhendu Saha', 'bca', 'sem5', 'alpha', 'networking', 'encoding technique', '21-10-2022', '/api/notes/10_even _no.c', ''),
-(3, '2', 'subhendu Saha', 'bca', 'sem5', 'alpha', 'networking', 'encoding technique', '21-10-2022', '/api/notes/10_even _no.c', '');
+INSERT INTO `upload_notes` (`id`, `faculty_id`, `faculty_name`, `stream`, `sem`, `section`, `subject`, `subject_name`, `topic`, `date`, `file`, `recordinglink`) VALUES
+(3, '2', 'Tania Ghosh', '3', '13', 'Alpha', '73', 'MCA-101 Computer Organisation & Architecture', 'intro', '2000-11-01', '/api/notes/2022-10-23 (1).png', '');
 
 --
 -- Indexes for dumped tables
@@ -534,7 +527,7 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT for table `schedule_class`
 --
 ALTER TABLE `schedule_class`
-  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `semesters`

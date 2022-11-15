@@ -57,7 +57,7 @@ $(document).ready(async function () {
             <td>${stream}</td>
             <td>${sem}</td>
             <td>${arr[i].section}</td>
-            <td>${arr[i].subject}</td>
+            <td>${arr[i].subject_name}</td>
             <td>${arr[i].topic}</td>
             <td><a href="${arr[i].classlink}" download><button type="Link" class="btn btn-primary">Link</button></a></td>
          

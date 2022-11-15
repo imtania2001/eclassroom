@@ -30,35 +30,35 @@ $(document).ready(function () {
       let tbody = ``;
       for (let i = 0; i < arr.length; i++) {
         stream = arr[i].stream;
-        sem = arr[i].sem;      
-        if(stream==1)
-          stream="BCA";
-      else if(stream==2)
-          stream="BBA";
-      else if(stream==3)
-          stream="MCA";
-      else if(stream==4)
-          stream="MSC";
-      
-           if(sem==1||sem==7||sem==13||sem==17)
-          sem="SEM1";
-      else if(sem==2||sem==8||sem==14||sem==18)
-          sem="SEM2";
-      else if(sem==3||sem==9||sem==15||sem==19)
-          sem="SEM3";
-      else if(sem==4||sem==10||sem==16||sem==20)
-          sem="SEM4";
-      else if(sem==5||sem==11)
-          sem="SEM5";
-      else if(sem==6||sem==12)
-          sem="SEM6";
+        sem = arr[i].sem;
+        if (stream == 1)
+          stream = "BCA";
+        else if (stream == 2)
+          stream = "BBA";
+        else if (stream == 3)
+          stream = "MCA";
+        else if (stream == 4)
+          stream = "MSC";
+
+        if (sem == 1 || sem == 7 || sem == 13 || sem == 17)
+          sem = "SEM1";
+        else if (sem == 2 || sem == 8 || sem == 14 || sem == 18)
+          sem = "SEM2";
+        else if (sem == 3 || sem == 9 || sem == 15 || sem == 19)
+          sem = "SEM3";
+        else if (sem == 4 || sem == 10 || sem == 16 || sem == 20)
+          sem = "SEM4";
+        else if (sem == 5 || sem == 11)
+          sem = "SEM5";
+        else if (sem == 6 || sem == 12)
+          sem = "SEM6";
         tbody += `<tr>
                             <td>${i + 1}</td>
                             <td>${arr[i].date}</td>
                             <td>${stream}</td>
                             <td>${sem}</td>
                             <td>${arr[i].section}</td>
-                            <td>${arr[i].subject}</td>
+                            <td>${arr[i].subject_name}</td>
                             <td>${arr[i].topic}</td>
                             <td><a href="${arr[i].classlink}" download><button type="Link" class="btn btn-primary">Link</button></a></td>
                          
