@@ -44,6 +44,7 @@ function getFacultyNoteByIdHTML() {
   document.getElementById("mynote-container").innerHTML = html;
   document.getElementById("show-table").disabled = true;
   document.getElementById("show-form").disabled = false;
+  
 
 }
 
