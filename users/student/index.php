@@ -61,7 +61,7 @@ require 'auth.php';
                                             <p class="m-0 p-1"><span class="fw-bold">Mobile : </span> <?php echo $_SESSION['student']['phone']; ?></p>
                                             <p class="m-0 p-1"><span class="fw-bold">Email : </span> <?php echo $_SESSION['student']['email']; ?></p>
                                             <p class="m-0 p-1"><span class="fw-bold">D.O.B : </span> <?php echo $_SESSION['student']['dob']; ?></p>
-                                            <button class="btn btn-success w-100 my-2">Edit Profile</button>
+                                            <a href="editprofile.php"><button class="btn btn-success w-100 my-2">Edit Profile</button></a>
                                             </p>
                                         </div>
                                     </div>
