@@ -27,8 +27,8 @@ require 'auth.php';
                 <img src="../../static/images/logo.png" alt="">
             </div>
             <div class="menu">
-                <h3>Tania Ghosh <br>
-                    <span>Admin</span>
+                <h3>Admin<br>
+                    <!-- <span>Admin</span> -->
                 </h3>
                 <ul>
                     <?php

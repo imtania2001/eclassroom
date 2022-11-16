@@ -51,7 +51,7 @@ class User
                 $role = $row['role'];
                 $_SESSION['login'] = true;
                 if ($role == "admin") {
-                    $sql = "SELECT `id`, `unique_id`, `firstname`, `midname`, `lastname`, `gender`, `phone`, `email`, `photo` FROM `admins` WHERE `email_id`='$email_id' AND `password`='$password'";
+                    $sql = "SELECT `unique_id`, `firstname`, `midname`, `lastname`, `gender`, `phone`, `email`, `password`, `photo` FROM `admins` WHERE `email`='$email_id' AND `password`='$password'";
                     $result = $conn->query($sql);
                     if (!$result || !$result->num_rows)
                         return false;
