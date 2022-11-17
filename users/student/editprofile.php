@@ -49,11 +49,10 @@ require 'auth.php';
             </div>
 
             <section class="page-container">
-                <div class="page-content overflow-auto" id="mynote-container">
+                <div class="page-content overflow-auto" id="mynote-container" style="margin-top: 100px;">
                     <div class="form-container">
                         <form action="" method="post">
                             <h3>Edit Profile</h3>
-                            <input type="text" id="unique_id" required placeholder="Unique_id">
                             <input type="text" id="first_name" required placeholder="First Name">
                             <input type="text" id="mid_name" required placeholder="Mid Name">
                             <input type="text" id="last_name" required placeholder="Last Name">
@@ -74,14 +73,9 @@ require 'auth.php';
                                 <option value="beta">BETA</option>
 
                             </select>
-
-
                             <input type="tel" maxlength="10" id="phone" required placeholder="Mobile Number">
-                            <input type="email" id="email" value="<?php echo $_SESSION['student']['email']; ?>" readonly required placeholder="Email Id">
-                            <input type="password" id="password" required placeholder="password">
-                            <input type="password" id="cpassword" required placeholder="confirm your password">
-                            <input type="file" id="photo" required placeholder="photo">
-                            <input type="button" onclick="studentRegistration();" name="submit" value="Submit" class="form-btn">
+                            <input type="file" id="photo" placeholder="photo">
+                            <input type="button" onclick="studentEditProfile();" name="submit" value="Submit" class="form-btn">
                         </form>
 
                     </div>
@@ -95,7 +89,7 @@ require 'auth.php';
     </div>
 
     <script src="static/js/admin.js"></script>
-    <!-- <script src="static/js/mynotes.js"></script> -->
+    <script src="static/js/profile.js"></script>
 </body>
 
 </html>

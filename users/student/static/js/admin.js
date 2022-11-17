@@ -11,7 +11,7 @@ t.classList.toggle('active');
 
 
 let login_user = JSON.parse(sessionStorage.getItem('user'));
-console.log(login_user);
+
 if(!login_user){
     window.location.replace("/");
 }else{

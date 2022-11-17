@@ -14,30 +14,36 @@ class Registrationstudent
         //return $sql;
         $result = $conn->query($sql);
 
-        if ($result){
+        if ($result) {
             $sql = "UPDATE `login` SET `status`=1, `password`='$password' WHERE `email_id`='$email'";
             $conn->query($sql);
             return true;
-        }
-        else
+        } else
             return false;
     }
     // Edit
-    public static function edit($id)
+    public static function edit($id, $first_name, $mid_name, $lastname, $dob, $gender, $stream, $section, $semester, $phone, $photo = "")
     {
         $config = Mysql::config();
         $conn = new mysqli($config[0], $config[1], $config[2], $config[3]);
         if (!$conn)
             return false;
-        $sql = "SELECT * FROM `students` WHERE `id`='$id' ";
+
+        if ($phone != "") {
+            $sql = "UPDATE `students` SET `first_name`='$first_name',`mid_name`='$mid_name',`lastname`='$lastname',`dob`='$dob',`gender`='$gender',`stream`='$stream',`section`='$section',`semester`='$semester',`phone`='$phone',`photo`='$photo' WHERE `id`='$id'";
+        } else {
+            $sql = "UPDATE `students` SET `first_name`='$first_name',`mid_name`='$mid_name',`lastname`='$lastname',`dob`='$dob',`gender`='$gender',`stream`='$stream',`section`='$section',`semester`='$semester',`phone`='$phone' WHERE `id`='$id'";
+        }
         $result = $conn->query($sql);
+
         if ($result) {
-            $total = $result->num_rows;
-            $arr = [];
-            while ($row = $result->fetch_assoc()) {
-                $arr[] = $row;
-            }
-            return array("total" => $total, "row" => $arr);
+            $sql = "SELECT  `id`, `unique_id`, `first_name`, `mid_name`, `lastname`, `dob`, `gender`, `stream`, `section`, `semester`, `phone`, `email`, `photo` FROM `students` WHERE `id`='$id'";
+            $result = $conn->query($sql);
+            if (!$result || !$result->num_rows)
+                return false;
+            $user = $result->fetch_assoc();
+            $_SESSION['student'] = $user;
+            return array("edit" => true,  "user" => $user, "message" => "Profile Edited");
         } else
             return false;
     }

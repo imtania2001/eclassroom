@@ -17,16 +17,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
         header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
 }
 header('Content-type: application/json');
-if(isset($_REQUEST['id'])){
+if(isset($_REQUEST['id'])&& isset($_REQUEST['first_name']) && isset($_REQUEST['mid_name'])&& isset($_REQUEST['lastname'])&&isset($_REQUEST['dob'])&&isset($_REQUEST['gender'])&&isset($_REQUEST['stream'])&& isset($_REQUEST['section']) && isset($_REQUEST['phone']) && isset($_REQUEST['semester'])){
     include "../../controllers/Registrationstudent.php";
-    $result = Registrationstudent::edit($_REQUEST['id']);
+
+    $filepath = "";
+    if(isset($_FILES['photo'])){
+        $url = "../../photos/";  
+        $var = $_REQUEST['phone']."_".$_FILES['file']['name'];
+        $furl = $url . $var;
+        move_uploaded_file($_FILES['file']['tmp_name'], $furl);  
+        $path = "/api/photos/";  
+        $filepath = $path.$var;
+    }
+
+    $result = Registrationstudent::edit($_REQUEST['id'],$_REQUEST['first_name'],$_REQUEST['mid_name'],$_REQUEST['lastname'],$_REQUEST['dob'],$_REQUEST['gender'],$_REQUEST['stream'],$_REQUEST['section'],$_REQUEST['semester'],$_REQUEST['phone'],$filepath);
     
     if($result){
         echo json_encode(
             array(
                 "status" => "success", 
                 "status_code" => "1200" , 
-                "message" => "edit"
+                "data" => $result
             )
         );
     }else{
@@ -36,5 +47,3 @@ if(isset($_REQUEST['id'])){
 }else{
     echo json_encode(array('status' => 'error', 'status_code' => 1400,  'message' => 'PARAMS NOT FOUND'));
 }
-
-?>
