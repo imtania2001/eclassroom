@@ -20,14 +20,15 @@ header('Content-type: application/json');
 if(isset($_REQUEST['id'])&& isset($_REQUEST['first_name']) && isset($_REQUEST['mid_name'])&& isset($_REQUEST['lastname'])&&isset($_REQUEST['dob'])&&isset($_REQUEST['gender'])&&isset($_REQUEST['stream'])&& isset($_REQUEST['section']) && isset($_REQUEST['phone']) && isset($_REQUEST['semester'])){
     include "../../controllers/Registrationstudent.php";
 
-    $filepath = "";
-    if(isset($_FILES['photo'])){
+    if(isset($_FILES['file'])){
         $url = "../../photos/";  
         $var = $_REQUEST['phone']."_".$_FILES['file']['name'];
         $furl = $url . $var;
         move_uploaded_file($_FILES['file']['tmp_name'], $furl);  
         $path = "/api/photos/";  
-        $filepath = $path.$var;
+        $filepath = $path.$var; 
+    }else{
+        $filepath = "";
     }
 
     $result = Registrationstudent::edit($_REQUEST['id'],$_REQUEST['first_name'],$_REQUEST['mid_name'],$_REQUEST['lastname'],$_REQUEST['dob'],$_REQUEST['gender'],$_REQUEST['stream'],$_REQUEST['section'],$_REQUEST['semester'],$_REQUEST['phone'],$filepath);

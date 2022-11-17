@@ -28,7 +28,7 @@ require 'auth.php';
             </div>
             <div class="menu">
                 <h3 id="login_user_name"><br>
-                    <span>Teacher</span>
+                    <span>Student</span>
                 </h3>
                 <ul>
                     <?php

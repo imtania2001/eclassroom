@@ -19,8 +19,6 @@ mid_name.value = login_user.mid_name;
 last_name.value = login_user.lastname;
 dob.value = login_user.dob;
 gender.value = login_user.gender;
-
-
 section.value = login_user.section;
 phone.value = login_user.phone;
 
@@ -135,7 +133,9 @@ async function studentEditProfile() {
     form.append("stream", stream.value);
     form.append("section", section.value);
     form.append("semester", semester.value);
-    form.append("file", photo.files[0]);
+    if(photo.files.length){
+        form.append("file", photo.files[0]);
+    }
 
     var settings = {
         "url": "/api/v1/studentregistration/edit.php",
@@ -148,15 +148,28 @@ async function studentEditProfile() {
 
     $.ajax(settings).done(function (response) {
         console.log(response);
+        // console.log("1++++++++++++++++++");
         if (response.status_code == 1200) {
+            // console.log("2++++++++++++++++++");
             let arr = response.data;
+            // console.log(arr);
+            // console.log(arr.user);
             sessionStorage.setItem("user", JSON.stringify(arr.user));
+            // console.log("3++++++++++++++++++");
+            let getUser = JSON.parse(sessionStorage.getItem('user'));
+            // console.log(getUser);
+            // console.log("4++++++++++++++++++");
+            console.log("4++++++++++++++++++");
+            login_user.photo = getUser.photo;
+            document.getElementById("profile").innerHTML = `<img src="${login_user.photo}" alt="">`;
+            document.getElementById("login_user_name").innerHTML = `${login_user.firstname} ${login_user.midname
+            } ${login_user.Lastname}`;
+            // console.log("5++++++++++++++++++");
             alert("Profile Edited");
             window.location.assign("index.php");
         } else {
             alert("Some Error Occured");
         }
     });
-
 
 }

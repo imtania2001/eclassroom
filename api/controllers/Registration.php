@@ -23,21 +23,28 @@ class Registration
     }
 
     //Registration Edit for teachers
-    public static function edit($id)
+    public static function edit($id, $first_name, $mid_name, $lastname, $dob, $gender,  $phone, $photo)
     {
         $config = Mysql::config();
         $conn = new mysqli($config[0], $config[1], $config[2], $config[3]);
         if (!$conn)
             return false;
-        $sql = "SELECT * FROM `teachers` WHERE `id`='$id' ";
+
+        if ($photo != "") {
+            $sql = "UPDATE `teachers` SET `firstname`='$first_name',`midname`='$mid_name',`Lastname`='$lastname',`dob`='$dob',`gender`='$gender',`phone`='$phone',`photo`='$photo' WHERE `id`='$id'";
+        } else {
+            $sql = "UPDATE `teachers` SET `firstname`='$first_name',`midname`='$mid_name',`Lastname`='$lastname',`dob`='$dob',`gender`='$gender',`phone`='$phone' WHERE `id`='$id'";
+        }
         $result = $conn->query($sql);
+
         if ($result) {
-            $total = $result->num_rows;
-            $arr = [];
-            while ($row = $result->fetch_assoc()) {
-                $arr[] = $row;
-            }
-            return array("total" => $total, "row" => $arr);
+            $sql = "SELECT `id`, `unique_id`, `firstname`, `midname`, `Lastname`, `dob`, `gender`, `phone`, `email`, `photo`  FROM `teachers` WHERE `id`='$id'";
+            $result = $conn->query($sql);
+            if (!$result || !$result->num_rows)
+                return false;
+            $user = $result->fetch_assoc();
+            $_SESSION['teacher'] = $user;
+            return array("edit" => true,  "user" => $user, "message" => "Profile Edited", "photo"=>$photo);
         } else
             return false;
     }

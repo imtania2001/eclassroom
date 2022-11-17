@@ -29,7 +29,7 @@ class Registrationstudent
         if (!$conn)
             return false;
 
-        if ($phone != "") {
+        if ($photo != "") {
             $sql = "UPDATE `students` SET `first_name`='$first_name',`mid_name`='$mid_name',`lastname`='$lastname',`dob`='$dob',`gender`='$gender',`stream`='$stream',`section`='$section',`semester`='$semester',`phone`='$phone',`photo`='$photo' WHERE `id`='$id'";
         } else {
             $sql = "UPDATE `students` SET `first_name`='$first_name',`mid_name`='$mid_name',`lastname`='$lastname',`dob`='$dob',`gender`='$gender',`stream`='$stream',`section`='$section',`semester`='$semester',`phone`='$phone' WHERE `id`='$id'";
