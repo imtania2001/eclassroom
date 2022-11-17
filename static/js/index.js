@@ -53,7 +53,7 @@ $("#login_form").submit(async function (e) {
 $("#signup_form").submit(async function (e) {
 
     e.preventDefault();
-    let email_id = document.getElementById("email_id").value;
+    let email_id = document.getElementById("email_id_signup").value;
     var form = new FormData();
     form.append("email_id", email_id);
     
