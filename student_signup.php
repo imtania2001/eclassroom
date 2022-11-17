@@ -50,7 +50,7 @@ if ($_SESSION['user_role'] != "student") {
             <input type="email" id="email" value="<?php echo $_SESSION['user_email']; ?>" readonly required placeholder="Email Id">
             <input type="password" id="password" required placeholder="password">
             <input type="password" id="cpassword" required placeholder="confirm your password">
-            <input type="file" id="photo" required placeholder="photo">
+            <input type="file" id="photo" accept="image/jpg,image/jpeg,image/png" required placeholder="photo">
             <input type="button" onclick="studentRegistration();" name="submit" value="register now" class="form-btn">
             <p>already have an account? <a href="index.php">login now</a></p>
         </form>

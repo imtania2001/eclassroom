@@ -173,7 +173,7 @@ class User
         if (!$conn)
             return false;
 
-        $sql = "SELECT `id`, `name`, `roll_number`, `email_id`, `mobile_number`, `dob`, `stream`, `semester`, `batch`, `photo` FROM `students` WHERE 1";
+        $sql = "SELECT `id`, `unique_id`, `first_name`, `mid_name`, `lastname`, `dob`, `gender`, `stream`, `section`, `semester`, `phone`, `email`, `photo` FROM `students` WHERE 1";
         $result = $conn->query($sql);
         if ($result) {
             $total = $result->num_rows;

@@ -135,7 +135,6 @@
                                             <th>DOB</th>
                                             <th>Stream</th>
                                             <th>Semester</th>
-                                            <th>Batch</th>
                                         </thead>
                                         <tbody id="fetch_student">
                                         </tbody>

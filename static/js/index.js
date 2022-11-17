@@ -134,7 +134,7 @@ async function teacherRegistration() {
     $.ajax(settings).done(function (response) {
         if (response.status_code == 1200) {
             alert(response.message);
-            window.location.reload();
+            window.location.assign("/");
         } else {
             alert("Some Error Occured");
         }
@@ -189,7 +189,7 @@ async function studentRegistration() {
     $.ajax(settings).done(function (response) {
         if (response.status_code == 1200) {
             alert(response.message);
-            window.location.assign("/signup.php");
+            window.location.assign("/");
         } else {
             alert("Some Error Occured");
         }

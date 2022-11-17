@@ -39,7 +39,7 @@ if ($_SESSION['user_role'] != "teacher") {
             <input type="email" id="email" name="email" value="<?php echo $_SESSION['user_email']; ?>" readonly required placeholder="email">
             <input type="password" id="password" name="password" required placeholder="password">
             <input type="password" id="cpassword" name="cpassword" required placeholder="confirm your password">
-            <input type="file" id="photo" name="photo" required placeholder="photo">
+            <input type="file" id="photo" accept="image/jpg,image/jpeg,image/png" name="photo" required placeholder="photo">
 
             <input type="button" onclick="teacherRegistration();" name="submit" value="register now" class="form-btn">
             <p>already have an account? <a href="index.php">login now</a></p>

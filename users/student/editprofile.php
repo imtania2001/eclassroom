@@ -81,7 +81,7 @@ require 'auth.php';
                             <input type="password" id="password" required placeholder="password">
                             <input type="password" id="cpassword" required placeholder="confirm your password">
                             <input type="file" id="photo" required placeholder="photo">
-                            <input type="button" onclick="studentRegistration();" name="submit" value="register now" class="form-btn">
+                            <input type="button" onclick="studentRegistration();" name="submit" value="Submit" class="form-btn">
                         </form>
 
                     </div>

@@ -167,7 +167,7 @@ async function viewAllTeacher(){
                 <tr>
                     <td>${i+1}</td>
                     <td>${arr[i].unique_id}</td>
-                    <td>${arr[i].firstname}${arr[i].midname}${arr[i].Lastname}</td>
+                    <td>${arr[i].firstname} ${arr[i].midname} ${arr[i].Lastname}</td>
                     <td>${arr[i].phone}</td>
                     <td>${arr[i].email}</td>
                     <td>${arr[i].dob}</td>
@@ -193,7 +193,8 @@ viewAllTeacher();
 
 
 async function viewAllStudent(){
-    var settings = {
+    // alert("Hello");
+    let settings = {
         "url": "/api/v1/users/viewAllStudent.php",
         "method": "GET",
         "timeout": 0,
@@ -217,18 +218,40 @@ async function viewAllStudent(){
 
             let tbody = ``; // backquote
             for(let i=0;i<total;i++){
+                let stream = arr[i].stream;
+                let sem = arr[i].semester;
+                if (stream == 1)
+                    stream = "BCA";
+                else if (stream == 2)
+                    stream = "BBA";
+                else if (stream == 3)
+                    stream = "MCA";
+                else if (stream == 4)
+                    stream = "MSC";
+
+                if (sem == 1 || sem == 7 || sem == 13 || sem == 17)
+                    sem = "SEM1";
+                else if (sem == 2 || sem == 8 || sem == 14 || sem == 18)
+                    sem = "SEM2";
+                else if (sem == 3 || sem == 9 || sem == 15 || sem == 19)
+                    sem = "SEM3";
+                else if (sem == 4 || sem == 10 || sem == 16 || sem == 20)
+                    sem = "SEM4";
+                else if (sem == 5 || sem == 11)
+                    sem = "SEM5";
+                else if (sem == 6 || sem == 12)
+                    sem = "SEM6";
                 // Concatenating the table rows and printing dynamic values from api which are stored in arr varriable
                 tbody += `
                 <tr>
                 <td>${i+1}</td>
-                <td>${arr[i].roll_number}</td>
-                <td>${arr[i].name}</td>
-                <td>${arr[i].mobile_number}</td>
-                <td>${arr[i].email_id}</td>
+                <td>${arr[i].unique_id}</td>
+                <td>${arr[i].first_name}${arr[i].mid_name}${arr[i].lastname}</td>
+                <td>${arr[i].phone}</td>
+                <td>${arr[i].email}</td>
                 <td>${arr[i].dob}</td>
-                <td>${arr[i].stream}</td>
-                <td>${arr[i].semester}</td>
-                <td>${arr[i].batch}</td>
+                <td>${stream}</td>
+                <td>${sem}</td>
             </tr>
                 `;
             }
@@ -244,6 +267,7 @@ async function viewAllStudent(){
         }
 
       });
+
 }
 
-viewAllStudent();;
+viewAllStudent();
