@@ -94,20 +94,52 @@ $("#signup_form").submit(async function (e) {
 async function teacherRegistration() {
     // fetch data from the form then pass them as params to the api
     let unique_id = document.getElementById("unique_id").value;
+    if(unique_id==""){
+        alert("Enter Unique ID");
+        return false;
+    }
     let firstname = document.getElementById("firstname").value;
-    let midname = document.getElementById("midname").value;
+    if(firstname==""){
+        alert("Enter First Name");
+        return false;
+    }
+    let midname = document.getElementById("midname").value; // Not mandatory
     let Lastname = document.getElementById("Lastname").value;
+    if(Lastname==""){
+        alert("Enter Last Name");
+        return false;
+    }
     let dob = document.getElementById("dob").value;
+    if(dob==""){
+        alert("Enter dob");
+        return false;
+    }
     let gender = document.getElementById("gender").value;
+    if(gender==""){
+        alert("Enter geder");
+        return false;
+    }
     let phone = document.getElementById("phone").value;
+    if(phone==""){
+        alert("Enter mobile number");
+        return false;
+    }
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
+    if(password==""){
+        alert("Enter pasword");
+        return false;
+    }
     let cpassword = document.getElementById("cpassword").value;
     if(password!=cpassword){
         alert("Password should be same");
         return false;
     }
     let photo = document.getElementById("photo");
+    if(photo==""){
+        alert("upload Photo");
+        return false;
+    }
 
     var form = new FormData();
     form.append("unique_id", unique_id);
@@ -148,12 +180,36 @@ async function studentRegistration() {
     // Getting the Form Inputs
     // fetch data from the form then pass them as params to the api
     let unique_id = document.getElementById("unique_id").value;
+    if(unique_id==""){
+        alert("Enter unique id");
+        return false;
+    }
     let first_name = document.getElementById("first_name").value;
+    if(first_name==""){
+        alert("Enter First Name");
+        return false;
+    }
     let mid_name = document.getElementById("mid_name").value;
     let last_name = document.getElementById("last_name").value;
+    if(last_name==""){
+        alert("Enter Last Name");
+        return false;
+    }
     let dob = document.getElementById("dob").value;
+    if(dob==""){
+        alert("Enter dob");
+        return false;
+    }
     let gender = document.getElementById("gender").value;
+    if(gender==""){
+        alert("Enter gender");
+        return false;
+    }
     let stream = document.getElementById("stream").value;
+    if(stream==""){
+        alert("Enter stream");
+        return false;
+    }
     let section = document.getElementById("section").value;
     let semester = document.getElementById("semester").value;
     let phone = document.getElementById("phone").value;
