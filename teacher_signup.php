@@ -19,10 +19,45 @@ if ($_SESSION['user_role'] != "teacher") {
     <?php
     include "utils/header.php"
     ?>
+    <!-- Font Awesome -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+  rel="stylesheet"
+/>
+<!-- Google Fonts -->
+<link
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+  rel="stylesheet"
+/>
+<!-- MDB -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.css"
+  rel="stylesheet"
+/>
+<style>
+    body{
+        /* background: rgb(2,0,36);
+background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(0,53,255,0.72919590199361) 100%); */
+background: rgb(63,94,251);
+background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+    }
+
+    .form-container{
+        /* background: rgb(2,0,36);
+background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(0,53,255,0.24180094401041663) 100%); */
+/* background: rgb(2,0,36);
+
+background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(164,255,0,0.5891398795846463) 100%); */
+/* background: rgb(63,94,251);
+background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%); */
+background: rgb(63,94,251);
+background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,0.7740138291644783) 100%);
+    }
+</style>
 </head>
 
 <body>
-    <div class="form-container">
+    <div class="form-container dusty-grass-gradient color-block mb-3 mx-auto rounded-circle z-depth-1-half  ">
         <form action="" method="post">
             <h3>register now</h3>
             <input type="text" id="unique_id" name="Unique_id" required placeholder="Unique_id">
@@ -54,6 +89,11 @@ if ($_SESSION['user_role'] != "teacher") {
             window.location.replace("/signup.php");
         }
     </script>
+    <!-- MDB -->
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.js"
+></script>
 </body>
 
 </html>
