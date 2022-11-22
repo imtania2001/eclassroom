@@ -49,33 +49,14 @@ require 'auth.php';
             </div>
 
             <section class="page-container">
-                <div class="page-content overflow-auto" id="mynote-container" style="margin-top: 100px;">
+                <div class="page-content overflow-auto" id="mynote-container" style="margin-top: 0px;">
                     <div class="form-container">
                         <form action="" method="post">
-                            <h3>Edit Profile</h3>
-                            <input type="text" id="first_name" required placeholder="First Name">
-                            <input type="text" id="mid_name" required placeholder="Mid Name">
-                            <input type="text" id="last_name" required placeholder="Last Name">
-                            <input type="date" id="dob" required placeholder="dob">
-                            <select id="gender">
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                                <option value="others">Others</option>
-                            </select>
-                            <select id="stream" onchange="fetchSemester();">
-                                <option value="" selected disabled>Select Stream</option>
-                            </select>
-                            <select id="semester">
-                                <option value="" selected disabled>Select Semester</option>
-                            </select>
-                            <select id="section">
-                                <option value="alpha">ALPHA</option>
-                                <option value="beta">BETA</option>
-
-                            </select>
-                            <input type="tel" maxlength="10" id="phone" required placeholder="Mobile Number">
-                            <input type="file" id="photo" placeholder="photo">
-                            <input type="button" onclick="studentEditProfile();" name="submit" value="Submit" class="form-btn">
+                            <h3>Change Password</h3>
+                            <input type="password" id="current_password" required placeholder="Enter Current Password">
+                            <input type="password" id="password" required placeholder="Enter New Password">
+                            <input type="password" id="confirm_password" required placeholder="Re-enter New Password">
+                            <input type="button" onclick="changePassword();" name="submit" value="Change Password" class="form-btn">
                         </form>
 
                     </div>

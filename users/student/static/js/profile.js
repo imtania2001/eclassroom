@@ -133,7 +133,7 @@ async function studentEditProfile() {
     form.append("stream", stream.value);
     form.append("section", section.value);
     form.append("semester", semester.value);
-    if(photo.files.length){
+    if (photo.files.length) {
         form.append("file", photo.files[0]);
     }
 
@@ -163,7 +163,7 @@ async function studentEditProfile() {
             login_user.photo = getUser.photo;
             document.getElementById("profile").innerHTML = `<img src="${login_user.photo}" alt="">`;
             document.getElementById("login_user_name").innerHTML = `${login_user.firstname} ${login_user.midname
-            } ${login_user.Lastname}`;
+                } ${login_user.Lastname}`;
             // console.log("5++++++++++++++++++");
             alert("Profile Edited");
             window.location.assign("index.php");
@@ -172,4 +172,39 @@ async function studentEditProfile() {
         }
     });
 
+}
+
+
+async function changePassword() {
+    let current_password = document.getElementById("current_password").value;
+    let password = document.getElementById("password").value;
+    let confirm_password = document.getElementById("confirm_password").value;
+    if(password != confirm_password){
+        alert("Both Password Should be same");
+        return false;
+    }
+    var form = new FormData();
+    form.append("email_id", login_user.email);
+    form.append("role", "student");
+    form.append("current_password", current_password);
+    form.append("password", password);
+
+    var settings = {
+        "url": "/api/v1/users/changePassword.php",
+        "method": "POST",
+        "timeout": 0,
+        "processData": false,
+        "contentType": false,
+        "data": form
+    };
+
+    $.ajax(settings).done(function (response) {
+        // console.log(response);
+        if(response.status_code==1200){
+            alert("Password Changed Successfully");
+            history.back();
+        }else{
+            alert("Invalid Credentials");
+        }
+    });
 }

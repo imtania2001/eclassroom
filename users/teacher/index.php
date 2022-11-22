@@ -62,6 +62,7 @@ require 'auth.php';
                                             <p class="m-0 p-1"><span class="fw-bold">Email : </span> <?php echo $_SESSION['teacher']['email']; ?></p>
                                             <p class="m-0 p-1"><span class="fw-bold">D.O.B : </span> <?php echo $_SESSION['teacher']['dob']; ?></p>
                                            <a href= "editprofile.php" ><button class="btn btn-success w-100 my-2">Edit Profile</button></a>
+                                           <a href="changepassword.php"><button class="btn btn-danger w-100 mt-2">Change Password</button></a>
                                             </p>
                                         </div>
                                     </div>

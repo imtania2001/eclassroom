@@ -4,6 +4,31 @@ require("Mysql.php");
 session_start();
 class User
 {
+    public static function changePassword($email_id,$role,$current_password,$new_password)
+    {
+        $config = Mysql::config();
+        $conn = new mysqli($config[0], $config[1], $config[2], $config[3]);
+        if (!$conn)
+            return false;
+
+        $sql = "SELECT * FROM `login` WHERE `email_id`='$email_id' AND `password`='$current_password'";
+        $result = $conn->query($sql);
+        if(!$result || !$result->num_rows){
+            return false;
+        }
+
+        $sql = "UPDATE `login` SET `password`='$new_password' WHERE `email_id`='$email_id'";
+        $result = $conn->query($sql);
+        if($role == "teacher"){
+            $sql = "UPDATE `teachers` SET `password`='$new_password' WHERE `email`='$email_id'";
+            $result = $conn->query($sql);
+        }else if($role == "student"){
+            $sql = "UPDATE `students` SET `password`='$new_password' WHERE `email`='$email_id'";
+            $result = $conn->query($sql);
+        }
+        return true;
+
+    }
     public static function checkUser($email_id)
     {
         $config = Mysql::config();

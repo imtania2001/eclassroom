@@ -80,7 +80,7 @@ function getFacultyNoteByIdHTML() {
                             <td>${arr[i].section}</td>
                             <td>${arr[i].subject_name}</td>
                             <td>${arr[i].topic}</td>
-                            <td><a href="${arr[i].file}" download><button class="btn btn-primary"><i class="fa-solid fa-eye"></i></button></a></td>
+                            <td><a href="${arr[i].file}" ><button class="btn btn-primary"><i class="fa-solid fa-eye"></i></button></a></td>
                             <td>
                               <a href="${arr[i].recordinglink}" target="_blank"><button class="btn btn-warning">
                                 <i class="fa-solid fa-link"></i>
@@ -93,6 +93,7 @@ function getFacultyNoteByIdHTML() {
                             </td>
                           </tr>
                 `;
+                console.log(arr[i]);
       }
       document.getElementById("fetch_notes").innerHTML = tbody;
     }

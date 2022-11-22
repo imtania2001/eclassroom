@@ -63,3 +63,39 @@ async function TeacherEditProfile() {
         }
     });
 }
+
+
+
+async function changePassword() {
+    let current_password = document.getElementById("current_password").value;
+    let password = document.getElementById("password").value;
+    let confirm_password = document.getElementById("confirm_password").value;
+    if(password != confirm_password){
+        alert("Both Password Should be same");
+        return false;
+    }
+    var form = new FormData();
+    form.append("email_id", login_user.email);
+    form.append("role", "teacher");
+    form.append("current_password", current_password);
+    form.append("password", password);
+
+    var settings = {
+        "url": "/api/v1/users/changePassword.php",
+        "method": "POST",
+        "timeout": 0,
+        "processData": false,
+        "contentType": false,
+        "data": form
+    };
+
+    $.ajax(settings).done(function (response) {
+        // console.log(response);
+        if(response.status_code==1200){
+            alert("Password Changed Successfully");
+            history.back();
+        }else{
+            alert("Invalid Credentials");
+        }
+    });
+}

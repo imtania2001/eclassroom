@@ -22,13 +22,13 @@ require 'auth.php';
         <div class="topdesign">
         </div>
         <div class="action">
-        <div class="profile" id="profile" onclick="toggle();">
-                
-                </div>
-                <div class="menu">
-                    <h3 id="login_user_name"><br>
-                        <span>Teacher</span>
-                    </h3>
+            <div class="profile" id="profile" onclick="toggle();">
+
+            </div>
+            <div class="menu">
+                <h3 id="login_user_name"><br>
+                    <span>Teacher</span>
+                </h3>
                 <ul>
                     <?php
                     include "utils/menubar.php";
@@ -56,12 +56,13 @@ require 'auth.php';
                                     <div class="card bg-transparent" style=" box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);">
                                         <img src="<?php echo $_SESSION['student']['photo']; ?>" id="profile_img" class="card-img-top py-3 " alt="...">
                                         <div class="card-body">
-                                            <h5 class="card-title fw-bold"><?php echo $_SESSION['student']['first_name']." ".$_SESSION['student']['mid_name']." ".$_SESSION['student']['lastname']; ?></h5>
+                                            <h5 class="card-title fw-bold"><?php echo $_SESSION['student']['first_name'] . " " . $_SESSION['student']['mid_name'] . " " . $_SESSION['student']['lastname']; ?></h5>
                                             <p class="card-text m-0 text-center">
                                             <p class="m-0 p-1"><span class="fw-bold">Mobile : </span> <?php echo $_SESSION['student']['phone']; ?></p>
                                             <p class="m-0 p-1"><span class="fw-bold">Email : </span> <?php echo $_SESSION['student']['email']; ?></p>
                                             <p class="m-0 p-1"><span class="fw-bold">D.O.B : </span> <?php echo $_SESSION['student']['dob']; ?></p>
                                             <a href="editprofile.php"><button class="btn btn-success w-100 my-2">Edit Profile</button></a>
+                                            <a href="changepassword.php"><button class="btn btn-danger w-100 mt-2">Change Password</button></a>
                                             </p>
                                         </div>
                                     </div>
@@ -75,9 +76,9 @@ require 'auth.php';
                                     <div class="card h-100 bg-transparent box-shadow">
                                         <img src="static/images/schedule.png" class="card-img-top w-auto m-auto py-2" height="100px" alt="...">
                                         <div class="card-body">
-                                        <h1 class="text-center fw-bold blockquote fs-1" id="schedule_class">(0)</h1>
+                                            <h1 class="text-center fw-bold blockquote fs-1" id="schedule_class">(0)</h1>
                                             <h5 class="card-title text-center">Scheduled Classes</h5>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
@@ -85,18 +86,18 @@ require 'auth.php';
                                     <div class="card h-100 bg-transparent box-shadow">
                                         <img src="static/images/edit.png" class="card-img-top w-auto m-auto py-2" height="100px" alt="...">
                                         <div class="card-body">
-                                        <h1 class="text-center fw-bold blockquote fs-1" id="upload_notes">(0)</h1>
+                                            <h1 class="text-center fw-bold blockquote fs-1" id="upload_notes">(0)</h1>
                                             <h5 class="card-title text-center">Notes Uploaded</h5>
-                                                                                    </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="card h-100 bg-transparent box-shadow">
                                         <img src="static/images/envelope.png" class="card-img-top w-auto m-auto py-2" height="100px" alt="...">
                                         <div class="card-body">
-                                        <h1 class="text-center fw-bold blockquote fs-1" id="updates">(0)</h1>
+                                            <h1 class="text-center fw-bold blockquote fs-1" id="updates">(0)</h1>
                                             <h5 class="card-title text-center">Updates</h5>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
