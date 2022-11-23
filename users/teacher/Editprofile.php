@@ -40,11 +40,11 @@ require 'auth.php';
 
             <div class="sc-header" style="background:transparent; ">
                 <div class="sc-header-logo">
-                    <a href="index.php"><img src="../../static/images/logo.png" alt="TihCollegeSpace"></a>
+                    <a href="index.php"><img src="../../static/images/tihlogo.png" alt="Tih E-Classroom"></a>
                 </div>
                 <div class="sc-header-name">
                     <a href="index.php">
-                        <h2>TIH College Space</h2>
+                        <h2>TIH E-Classroom</h2>
                     </a>
                 </div>
             </div>

@@ -12,7 +12,7 @@ require 'auth.php';
     <title>STUDENT | Profile</title>
     <link rel="stylesheet" href="static/css/panel.css">
     <link rel="stylesheet" href="static/css/style.css">
-    <link rel="shortcut icon" href="static/images/logo.png" />
+    <link rel="shortcut icon" href="static/images/tihlogo.png" />
     <?php
     include "utils/header.php";
     ?>
@@ -39,11 +39,11 @@ require 'auth.php';
 
             <div class="sc-header" style="background:transparent; ">
                 <div class="sc-header-logo">
-                    <a href="index.php"><img src="../../static/images/logo.png" alt="TihCollegeSpace"></a>
+                    <a href="index.php"><img src="../../static/images/tihlogo.png" alt="Tih E-Classroom"></a>
                 </div>
                 <div class="sc-header-name">
                     <a href="index.php">
-                        <h2>TIH College Space</h2>
+                        <h2>TIH E-Classroom</h2>
                     </a>
                 </div>
             </div>
