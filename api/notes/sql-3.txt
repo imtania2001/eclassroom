@@ -1,0 +1,111 @@
+SQL> spool
+currently spooling to E:\sql practical/sql-3.txt
+SQL> desc ditipriya
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMP_ID                                    NOT NULL VARCHAR2(20)
+ FIRST_NAME                                NOT NULL VARCHAR2(20)
+ LAST_NAME                                 NOT NULL VARCHAR2(20)
+ EMAIL_ID                                           VARCHAR2(10)
+ GENDER                                             CHAR(1)
+ CONTACT_NO                                         CHAR(10)
+ SALARY                                             NUMBER(10)
+ DEPT_ID                                            VARCHAR2(10)
+
+SQL> alter table ditipriya
+  2  add constraint ditipriya_gender_check check(gender in('M' ,'F'));
+
+Table altered.
+
+SQL> desc ditipriya
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMP_ID                                    NOT NULL VARCHAR2(20)
+ FIRST_NAME                                NOT NULL VARCHAR2(20)
+ LAST_NAME                                 NOT NULL VARCHAR2(20)
+ EMAIL_ID                                           VARCHAR2(10)
+ GENDER                                             CHAR(1)
+ CONTACT_NO                                         CHAR(10)
+ SALARY                                             NUMBER(10)
+ DEPT_ID                                            VARCHAR2(10)
+
+SQL> create table ditipriya_dept
+  2  (
+  3  dept_id varchar2(10),
+  4  dept_name varchar2(10)
+  5  );
+
+Table created.
+
+SQL> desc ditipriya_dept
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPT_ID                                            VARCHAR2(10)
+ DEPT_NAME                                          VARCHAR2(10)
+
+SQL> alter table ditipriya_dept
+  2  add constraint ditipriya_dept_id_pk primary key(dept_id);
+
+Table altered.
+
+SQL> desc ditipriya_dept
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPT_ID                                   NOT NULL VARCHAR2(10)
+ DEPT_NAME                                          VARCHAR2(10)
+
+SQL> alter table ditipriya_dept
+  2  add constraint dept_name unique;
+add constraint dept_name unique
+                              *
+ERROR at line 2:
+ORA-00906: missing left parenthesis 
+
+
+SQL> alter table ditipriya_dept
+  2  modify dept_name unique;
+
+Table altered.
+
+SQL> desc ditipriya_dept
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPT_ID                                   NOT NULL VARCHAR2(10)
+ DEPT_NAME                                          VARCHAR2(10)
+
+SQL> alter table ditipriya
+  2  add constraint ditipriya_dept_id_fk foregin key(dept_id)
+  3  references ditipriya_dept(dept_id) on delete set null;
+add constraint ditipriya_dept_id_fk foregin key(dept_id)
+                                                *
+ERROR at line 2:
+ORA-01735: invalid ALTER TABLE option 
+
+
+SQL> add constraint ditipriya_dept_id_fk foreign key(dept_id)
+SP2-0734: unknown command beginning "add constr..." - rest of line ignored.
+SQL> alter table ditipriya
+  2  add  constraint ditipriya_dept_id_fk foreign key(dept_id)
+  3  references ditipriya_dept(dept_id) on delete set null;
+
+Table altered.
+
+SQL> desc ditipriya
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMP_ID                                    NOT NULL VARCHAR2(20)
+ FIRST_NAME                                NOT NULL VARCHAR2(20)
+ LAST_NAME                                 NOT NULL VARCHAR2(20)
+ EMAIL_ID                                           VARCHAR2(10)
+ GENDER                                             CHAR(1)
+ CONTACT_NO                                         CHAR(10)
+ SALARY                                             NUMBER(10)
+ DEPT_ID                                            VARCHAR2(10)
+
+SQL> desc ditipriya_dept
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPT_ID                                   NOT NULL VARCHAR2(10)
+ DEPT_NAME                                          VARCHAR2(10)
+
+SQL> spool off

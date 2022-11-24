@@ -59,7 +59,7 @@ background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,0.7740
 <body>
     <div class="form-container dusty-grass-gradient color-block mb-3 mx-auto rounded-circle z-depth-1-half  ">
         <form action="" method="post">
-            <h3>register now</h3>
+            <h3>Student register now</h3>
             <input type="text" id="unique_id" name="Unique_id" required placeholder="Unique_id">
             <input type="text" id="firstname" name="Firstname" required placeholder="Firstname">
             <input type="text" id="midname" name="midname"  placeholder="midname">
