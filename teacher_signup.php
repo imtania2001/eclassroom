@@ -51,31 +51,53 @@ background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(164,255,0,0.58913987
 /* background: rgb(63,94,251);
 background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%); */
 background: rgb(63,94,251);
-background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,0.7740138291644783) 100%);
+ background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,0.7740138291644783) 100%); 
     }
 </style>
 </head>
 
 <body>
     <div class="form-container dusty-grass-gradient color-block mb-3 mx-auto rounded-circle z-depth-1-half  ">
-        <form action="" method="post">
-            <h3>Student register now</h3>
-            <input type="text" id="unique_id" name="Unique_id" required placeholder="Unique_id">
+        <form action="" method="post" class="col-8 m-auto">
+            <h3>teacher Register Now</h3>
+            <div class="row">
+                <div class="col">
+            <input type="text" id="unique_id" name="Unique_id" required placeholder="Unique_id"></div>
+            <div class="col">
             <input type="text" id="firstname" name="Firstname" required placeholder="Firstname">
-            <input type="text" id="midname" name="midname"  placeholder="midname">
-            <input type="text" id="Lastname" name="Lastname" required placeholder="lastname">
-            <input type="date" id="dob" required placeholder="dob">
+            </div>
+</div>
+            <div class="row">
+                <div class="col">
+            <input type="text" id="midname" name="midname"  placeholder="midname"></div>
+                 <div class="col">
+            <input type="text" id="Lastname" name="Lastname" required placeholder="lastname"></div></div>
+            <div class="row">
+                <div class="col">
+            <input type="date" id="dob" required placeholder="dob"></div>
+            <div class="col">
             <select id="gender">
                 <option value="male">Male</option>
                 <option value="female">Female</option>
                 <option value="others">Others</option>
-            </select>
-            <input type="number" id="phone" name="phone" required placeholder="phone">
-            <input type="email" id="email" name="email" value="<?php echo $_SESSION['user_email']; ?>" readonly required placeholder="email">
-            <input type="password" id="password" name="password" required placeholder="password">
-            <input type="password" id="cpassword" name="cpassword" required placeholder="confirm your password">
+            </select></div>
+</div>
+            <div class="row">
+                <div class="col">
+            <input type="number" id="phone" name="phone" required placeholder="phone"></div></div>
+            <div class="row">
+            <div class="col">
+            <input type="email" id="email" name="email" value="<?php echo $_SESSION['user_email']; ?>" readonly required placeholder="email"></div></div>
+            <div class="row">
+                <div class="col">
+            <input type="password" id="password" name="password" required placeholder="password"></div>
+            <div class="col">
+            <input type="password" id="cpassword" name="cpassword" required placeholder="confirm your password"></div></div>
+            <div class="row">
+                <div class="col">
             <input type="file" id="photo" accept="image/jpg,image/jpeg,image/png" name="photo" required placeholder="photo">
-
+</div>
+</div>
             <input type="button" onclick="teacherRegistration();" name="submit" value="register now" class="form-btn">
             <p>already have an account? <a href="index.php">login now</a></p>
         </form>

@@ -59,34 +59,51 @@ background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,0.7740
     <div class="form-container row dusty-grass-gradient color-block mb-3 mx-auto rounded-circle z-depth-1-half  ">
         <form action="" method="post" class="col-8 m-auto">
             <h3>Student register now</h3>
-            <!-- <div class="row">
-                <div class="col"> -->
+             <div class="row">
+                <div class="col">
             <input type="text" id="unique_id" required placeholder="Unique_id">
-            <input type="text" id="first_name" required placeholder="First Name">
-            <input type="text" id="mid_name" required placeholder="Mid Name">
-            <input type="text" id="last_name" required placeholder="Last Name">
-            <input type="date" id="dob" required placeholder="dob">
+</div>
+<div class="col">
+            <input type="text" id="first_name" required placeholder="First Name"></div></div>
+            <div class="row">
+                <div class="col">
+            <input type="text" id="mid_name" required placeholder="Mid Name"></div>
+            <div class="col">
+            <input type="text" id="last_name" required placeholder="Last Name"></div></div>
+            <div class="row">
+                <div class="col">
+            <input type="date" id="dob" required placeholder="dob"></div>
+            <div class="col">
             <select id="gender">
                 <option value="male">Male</option>
                 <option value="female">Female</option>
                 <option value="others">Others</option>
-            </select>
+            </select></div></div>
+            <div class="row">
+                  <div class="col">
             <select id="stream" onchange="fetchSemester();">
                 <option value="" selected disabled>Select Stream</option>
-            </select>
+            </select></div>
+            <div class="col">
             <select id="semester"><option value="" selected disabled>Select Semester</option>
-            </select>
+            </select></div>
+            <!-- <div class="row">
+                <div class="col"> -->
             <select id="section">
             <option value="alpha">ALPHA</option>
             <option value="beta">BETA</option>
             
          </select>
-
-            
+         
+             <!-- <div class="row">
+            <div clss="col"> -->
             <input type="tel" maxlength="10" id="phone" required placeholder="Mobile Number">
             <input type="email" id="email" value="<?php echo $_SESSION['user_email']; ?>" readonly required placeholder="Email Id">
-            <input type="password" id="password" required placeholder="password">
-            <input type="password" id="cpassword" required placeholder="confirm your password">
+           <div class="row">
+            <div class="col">
+            <input type="password" id="password" required placeholder="password"></div>
+            <div class="col">
+            <input type="password" id="cpassword" required placeholder="confirm your password"></div></div>
             <input type="file" id="photo" accept="image/jpg,image/jpeg,image/png" required placeholder="photo">
             <input type="button" onclick="studentRegistration();" name="submit" value="register now" class="form-btn">
             <p>already have an account? <a href="index.php">login now</a></p>

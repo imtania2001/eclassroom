@@ -55,6 +55,7 @@
                     <div class="sc-heading-part">
                         <button type="button" class="btn btn-success btn-lg btn-block" id="show-form" onclick="showCreateUpdateForm()">New Update</button>
                     </div>
+                
                 </div>
                 <div class="page-content overflow-auto" id="updates-container">
 
